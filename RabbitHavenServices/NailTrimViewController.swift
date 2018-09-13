@@ -35,7 +35,6 @@ class NailTrimViewController: UIViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     @IBAction func stepperValueChanged(_ sender: UIStepper) {
@@ -44,30 +43,18 @@ class NailTrimViewController: UIViewController {
         let donation : Int = 5
         let duration : Int = 10
         let USD : Float = 5.00
+        
         numberLabel.text = Int(sender.value).description
+        
         if (quantity > 1) {
-            rabbitLabel.text = rabbitText + "s"
-            donationLabel.text = "$" + String(quantity * donation)
-            durationLabel.text = String(quantity * duration)
-            usdLabel.text = String(format: "%.2f", Float(quantity) * USD)
+            rabbitLabel.text = rabbitText + "s";
         } else {
             rabbitLabel.text = rabbitText
-            donationLabel.text = "$" + String(donation)
-            durationLabel.text = String(duration)
-            usdLabel.text = String(format: "%.2f", USD)
         }
+        
+        rabbitLabel.text = rabbitText + "s"
+        donationLabel.text = "$" + String(quantity * donation)
+        durationLabel.text = String(quantity * duration)
+        usdLabel.text = String(format: "%.2f", Float(quantity) * USD)
     }
-    
-    // MARK: - Navigation
-
-    /*
-   
-
-    // In a storyboard-based applicationself, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
