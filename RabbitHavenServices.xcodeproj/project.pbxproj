@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		DB54F2D62149D0A8009C85E3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB54F2D42149D0A8009C85E3 /* Main.storyboard */; };
-		DB54F2D82149EA8E009C85E3 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB54F2D72149EA8E009C85E3 /* CustomTableViewCell.swift */; };
 		DBAE2BCF2148696900711FCF /* NailTrimViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBAE2BCE2148696900711FCF /* NailTrimViewController.swift */; };
 		DBAE2BD1214899CD00711FCF /* ProviderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBAE2BD0214899CD00711FCF /* ProviderViewController.swift */; };
 		DBAE2BD321489CF300711FCF /* TimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBAE2BD221489CF300711FCF /* TimeViewController.swift */; };
@@ -21,7 +20,6 @@
 
 /* Begin PBXFileReference section */
 		DB54F2D52149D0A8009C85E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		DB54F2D72149EA8E009C85E3 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		DBAE2BCE2148696900711FCF /* NailTrimViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NailTrimViewController.swift; sourceTree = "<group>"; };
 		DBAE2BD0214899CD00711FCF /* ProviderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderViewController.swift; sourceTree = "<group>"; };
 		DBAE2BD221489CF300711FCF /* TimeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeViewController.swift; sourceTree = "<group>"; };
@@ -70,7 +68,6 @@
 				DBAE2BCE2148696900711FCF /* NailTrimViewController.swift */,
 				DBAE2BD0214899CD00711FCF /* ProviderViewController.swift */,
 				DBAE2BD221489CF300711FCF /* TimeViewController.swift */,
-				DB54F2D72149EA8E009C85E3 /* CustomTableViewCell.swift */,
 				DBDD4925214739010017304F /* Assets.xcassets */,
 				DBDD4927214739010017304F /* LaunchScreen.storyboard */,
 				DBDD492A214739010017304F /* Info.plist */,
@@ -153,7 +150,6 @@
 				DBAE2BCF2148696900711FCF /* NailTrimViewController.swift in Sources */,
 				DBAE2BD321489CF300711FCF /* TimeViewController.swift in Sources */,
 				DBAE2BD1214899CD00711FCF /* ProviderViewController.swift in Sources */,
-				DB54F2D82149EA8E009C85E3 /* CustomTableViewCell.swift in Sources */,
 				DBDD491E214739000017304F /* ServicesViewController.swift in Sources */,
 				DBDD491C214739000017304F /* AppDelegate.swift in Sources */,
 				DBDD4924214739000017304F /* RabbitHavenServices.xcdatamodeld in Sources */,
