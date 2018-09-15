@@ -10,6 +10,8 @@ import UIKit
 
 class NailTrimViewController: UIViewController {
 
+    var serviceDataModel = ServiceDataModel()
+    
     @IBOutlet weak var nextButton: UIButton!
     
     @IBOutlet weak var rabbitLabel: UILabel!
@@ -22,14 +24,6 @@ class NailTrimViewController: UIViewController {
     
     @IBOutlet weak var durationLabel: UILabel!
     
-    private let rabbitText : String = "Rabbit"
-    private let durationText : String = "minutes"
-    private let donation : Int = 5
-    private let duration : Int = 10
-    private let USD : Float = 5.00
-    private let space : String = " "
-    private let dollarSign : String = "$"
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -38,10 +32,10 @@ class NailTrimViewController: UIViewController {
         stepper.minimumValue = 1
         stepper.maximumValue = 6
         
-        rabbitLabel.text = intToString(num: 1) + space + rabbitText
-        donationLabel.text = dollarSign + intToString(num: donation)
-        durationLabel.text = intToString(num: 10) + space + durationText
-        usdLabel.text = floatToString(num: USD)
+        rabbitLabel.text = intToString(num: 1) + Constants.SPACE + Constants.RABBIT
+        donationLabel.text = Constants.DOLLAR_SIGN + intToString(num: self.serviceDataModel.donation)
+        durationLabel.text = intToString(num: self.serviceDataModel.duration) + Constants.SPACE + Constants.MINUTES
+        usdLabel.text = floatToString(num: self.serviceDataModel.donationUSD)
     }
 
     override func didReceiveMemoryWarning() {
@@ -49,19 +43,18 @@ class NailTrimViewController: UIViewController {
     }
     
     @IBAction func stepperValueChanged(_ sender: UIStepper) {
-        let s : String = "s"
 
         let quantity : Int = Int(sender.value)
         
         if (quantity > 1) {
-            rabbitLabel.text = String(quantity) + space + rabbitText + s;
+            rabbitLabel.text = String(quantity) + Constants.SPACE + Constants.RABBIT + Constants.S;
         } else {
-            rabbitLabel.text = String(quantity) + space + rabbitText
+            rabbitLabel.text = String(quantity) + Constants.SPACE + Constants.RABBIT
         }
         
-        donationLabel.text = dollarSign + String(quantity * donation)
-        durationLabel.text = String(quantity * duration) + space + durationText
-        usdLabel.text = floatToString(num: Float(quantity) * USD)
+        donationLabel.text = Constants.DOLLAR_SIGN + String(quantity * serviceDataModel.donation)
+        durationLabel.text = String(quantity * serviceDataModel.duration) + Constants.SPACE + Constants.MINUTES
+        usdLabel.text = floatToString(num: Float(quantity) * serviceDataModel.donationUSD)
     }
     
     func intToString(num: Int) -> String {

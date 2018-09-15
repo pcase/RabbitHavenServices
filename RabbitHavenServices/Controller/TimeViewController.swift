@@ -10,6 +10,8 @@ import UIKit
 
 class TimeViewController: UIViewController {
 
+    var serviceDataModel = ServiceDataModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

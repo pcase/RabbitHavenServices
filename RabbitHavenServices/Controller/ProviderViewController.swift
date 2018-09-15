@@ -10,6 +10,8 @@ import UIKit
 
 class ProviderViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    var serviceDataModel = ServiceDataModel()
+    
     @IBOutlet weak var tableView: UITableView!
     
     let providers = [("Bridgitte"), ("bunnyhop"), ("Debbie"), ("James"), ("Jennifer"), ("Kyomi"), ("Vicki"), ("anyprovider")]
