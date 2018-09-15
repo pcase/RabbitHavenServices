@@ -9,12 +9,21 @@
 import UIKit
 
 class TimeViewController: UIViewController {
-
+    
     var serviceDataModel = ServiceDataModel()
+    
+    @IBOutlet weak var serviceLabel: UILabel!
+    
+    @IBOutlet weak var donationAmount: UILabel!
+    
+    @IBOutlet weak var USDAmount: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        serviceLabel.text = serviceDataModel.service
+        donationAmount.text = Constants.DOLLAR_SIGN + Utils.intToString(num: serviceDataModel.donation)
+        USDAmount.text = Utils.floatToString(num: serviceDataModel.donationUSD)
     }
 
     override func didReceiveMemoryWarning() {

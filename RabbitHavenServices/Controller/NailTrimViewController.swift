@@ -32,10 +32,12 @@ class NailTrimViewController: UIViewController {
         stepper.minimumValue = 1
         stepper.maximumValue = 6
         
-        rabbitLabel.text = intToString(num: 1) + Constants.SPACE + Constants.RABBIT
-        donationLabel.text = Constants.DOLLAR_SIGN + intToString(num: self.serviceDataModel.donation)
-        durationLabel.text = intToString(num: self.serviceDataModel.duration) + Constants.SPACE + Constants.MINUTES
-        usdLabel.text = floatToString(num: self.serviceDataModel.donationUSD)
+        serviceDataModel.updateServiceData(quantity: 1)
+        
+        rabbitLabel.text = Utils.intToString(num: 1) + Constants.SPACE + Constants.RABBIT
+        donationLabel.text = Constants.DOLLAR_SIGN + Utils.intToString(num: serviceDataModel.donation)
+        durationLabel.text = Utils.intToString(num: serviceDataModel.duration) + Constants.SPACE + Constants.MINUTES
+        usdLabel.text = Utils.floatToString(num: serviceDataModel.donationUSD)
     }
 
     override func didReceiveMemoryWarning() {
@@ -52,16 +54,17 @@ class NailTrimViewController: UIViewController {
             rabbitLabel.text = String(quantity) + Constants.SPACE + Constants.RABBIT
         }
         
-        donationLabel.text = Constants.DOLLAR_SIGN + String(quantity * serviceDataModel.donation)
-        durationLabel.text = String(quantity * serviceDataModel.duration) + Constants.SPACE + Constants.MINUTES
-        usdLabel.text = floatToString(num: Float(quantity) * serviceDataModel.donationUSD)
+        serviceDataModel.updateServiceData(quantity: quantity)
+        
+        donationLabel.text = Constants.DOLLAR_SIGN + String(serviceDataModel.donation)
+        durationLabel.text = String(serviceDataModel.duration) + Constants.SPACE + Constants.MINUTES
+        usdLabel.text = Utils.floatToString(num: serviceDataModel.donationUSD)
     }
     
-    func intToString(num: Int) -> String {
-        return String(num)
-    }
-    
-    func floatToString(num: Float) -> String {
-        return String(format: "%.2f", Float(num))
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToProvider" {
+            let vcProvider = segue.destination as? ProviderViewController
+            vcProvider?.serviceDataModel = serviceDataModel
+        }
     }
 }

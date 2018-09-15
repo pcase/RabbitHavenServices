@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -27,7 +26,7 @@
                                 </items>
                             </toolbar>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rabbithavenlogotrimmed" translatesAutoresizingMaskIntoConstraints="NO" id="z1Y-L7-BBV">
-                                <rect key="frame" x="120.5" y="87" width="134" height="101"/>
+                                <rect key="frame" x="120" y="87" width="134" height="101"/>
                                 <viewLayoutGuide key="safeArea" id="zXf-6B-dbc"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="x2A-bh-HTD">
@@ -64,6 +63,7 @@
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="homeHealthChecksTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1br-xd-7FY"/>
+                                            <segue destination="lSj-KH-Kcc" kind="show" identifier="goToProviderFromServices" id="qe6-QU-eup"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G6D-uh-GGH">
@@ -80,6 +80,7 @@
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="bunnyHopTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OVY-67-jyW"/>
+                                            <segue destination="R4i-cP-lgQ" kind="show" identifier="goToTimeFromServices" id="Msu-nb-W2I"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -252,7 +253,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Txq-rg-odM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1421.5999999999999" y="-663.41829085457277"/>
+            <point key="canvasLocation" x="1340" y="-673"/>
         </scene>
         <!--Pick a Provider-->
         <scene sceneID="IKn-uN-Fj0">
@@ -304,7 +305,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7kQ-fv-a4y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2189.5999999999999" y="-650.82458770614699"/>
+            <point key="canvasLocation" x="2033" y="-673"/>
         </scene>
         <!--Pick a Time-->
         <scene sceneID="Kud-zf-BbM">
@@ -391,10 +392,15 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="a6s-ny-PV7"/>
                     </view>
+                    <connections>
+                        <outlet property="USDAmount" destination="urV-P3-xpA" id="Iur-UM-OJF"/>
+                        <outlet property="donationAmount" destination="edf-L7-GJw" id="Q5Z-Kh-YeR"/>
+                        <outlet property="serviceLabel" destination="y5B-tD-31m" id="Z2N-H0-yNd"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ooq-mU-UnJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3008.8000000000002" y="-651.72413793103453"/>
+            <point key="canvasLocation" x="2938" y="-673"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="GAi-IF-Jfc">
@@ -418,4 +424,8 @@
     <resources>
         <image name="rabbithavenlogotrimmed" width="134" height="101"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="Msu-nb-W2I"/>
+        <segue reference="qe6-QU-eup"/>
+    </inferredMetricsTieBreakers>
 </document>

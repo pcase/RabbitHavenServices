@@ -18,4 +18,9 @@ class ServiceDataModel {
     var duration : Int = 0
     var quantity : Int = 0
     
+    func updateServiceData(quantity: Int) {
+        donation = quantity * Constants.DONATION_AMOUNT
+        duration = quantity * Constants.DURATION_TIME
+        donationUSD = Float(quantity) * Float(Constants.DONATION_AMOUNT_USD)
+    }
 }

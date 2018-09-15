@@ -40,12 +40,19 @@ class ProviderViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCell(withIdentifier: "cellReuseIdentifier", for: indexPath)
-        cell.textLabel?.text = self.providers[indexPath.row]
-        cell.imageView?.image = self.providersImages[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cellReuseIdentifier", for: indexPath)
+        cell.textLabel?.text = providers[indexPath.row]
+        cell.imageView?.image = providersImages[indexPath.row]
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToTime" {
+            let vcTime = segue.destination as? TimeViewController
+            vcTime?.serviceDataModel = serviceDataModel
+        }
     }
 }

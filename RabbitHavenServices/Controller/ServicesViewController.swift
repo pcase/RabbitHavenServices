@@ -33,33 +33,31 @@ class ServicesViewController: UIViewController {
     }
 
     @IBAction func nailTrimTapped(_ sender: UIButton) {
-        self.serviceDataModel.service = Constants.NAIL_TRIMS
+        serviceDataModel.service = Constants.NAIL_TRIMS
     }
 
     @IBAction func homeHealthChecksTapped(_ sender: UIButton) {
-        self.serviceDataModel.service = Constants.HOME_HEALTH_CHECKS
+        serviceDataModel.service = Constants.HOME_HEALTH_CHECKS
     }
 
     @IBAction func bunnyHopTapped(_ sender: UIButton) {
-        self.serviceDataModel.service = Constants.BUNNY_HOP
+        serviceDataModel.service = Constants.BUNNY_HOP
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToNailTrims" {
             let vcNailTrim = segue.destination as? NailTrimViewController
-            vcNailTrim?.serviceDataModel = self.serviceDataModel
-
+            vcNailTrim?.serviceDataModel = serviceDataModel
         }
 
-        if segue.identifier == "goToProvider" {
+        if segue.identifier == "goToProviderFromServices" {
             let vcProvider = segue.destination as? ProviderViewController
-            vcProvider?.serviceDataModel = self.serviceDataModel
-
+            vcProvider?.serviceDataModel = serviceDataModel
         }
 
-        if segue.identifier == "goToTime" {
+        if segue.identifier == "goToTimeFromServices" {
             let vcTime = segue.destination as? TimeViewController
-            vcTime?.serviceDataModel = self.serviceDataModel
+            vcTime?.serviceDataModel = serviceDataModel
         }
     }
 }
