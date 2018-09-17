@@ -7,9 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B25C5AD8D83ADC59582A1A6D /* Pods_RabbitHavenServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 849D2D1A7C3B74B502E49EC0 /* Pods_RabbitHavenServices.framework */; };
 		DB216B4D214CB7DB004818B1 /* ServiceDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB216B4C214CB7DB004818B1 /* ServiceDataModel.swift */; };
 		DB216B4F214CBAEC004818B1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB216B4E214CBAEC004818B1 /* Constants.swift */; };
 		DB32EC4C214DADAA003A412D /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB32EC4B214DADAA003A412D /* Utils.swift */; };
+		DB32EC60214E2AF9003A412D /* BookingDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB32EC5F214E2AF9003A412D /* BookingDataModel.swift */; };
 		DB54F2D62149D0A8009C85E3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB54F2D42149D0A8009C85E3 /* Main.storyboard */; };
 		DBAE2BCF2148696900711FCF /* NailTrimViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBAE2BCE2148696900711FCF /* NailTrimViewController.swift */; };
 		DBAE2BD1214899CD00711FCF /* ProviderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBAE2BD0214899CD00711FCF /* ProviderViewController.swift */; };
@@ -19,12 +21,17 @@
 		DBDD4924214739000017304F /* RabbitHavenServices.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DBDD4922214739000017304F /* RabbitHavenServices.xcdatamodeld */; };
 		DBDD4926214739010017304F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DBDD4925214739010017304F /* Assets.xcassets */; };
 		DBDD4929214739010017304F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DBDD4927214739010017304F /* LaunchScreen.storyboard */; };
+		DBFDFB98214F747700E2E998 /* employees.json in Resources */ = {isa = PBXBuildFile; fileRef = DBFDFB97214F747700E2E998 /* employees.json */; };
+		DBFDFB9A214F77AF00E2E998 /* offers.json in Resources */ = {isa = PBXBuildFile; fileRef = DBFDFB99214F77AF00E2E998 /* offers.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		76A0D4334B681EDD1B0EEB79 /* Pods-RabbitHavenServices.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RabbitHavenServices.release.xcconfig"; path = "Pods/Target Support Files/Pods-RabbitHavenServices/Pods-RabbitHavenServices.release.xcconfig"; sourceTree = "<group>"; };
+		849D2D1A7C3B74B502E49EC0 /* Pods_RabbitHavenServices.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RabbitHavenServices.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB216B4C214CB7DB004818B1 /* ServiceDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceDataModel.swift; sourceTree = "<group>"; };
 		DB216B4E214CBAEC004818B1 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		DB32EC4B214DADAA003A412D /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		DB32EC5F214E2AF9003A412D /* BookingDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookingDataModel.swift; sourceTree = "<group>"; };
 		DB54F2D52149D0A8009C85E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DBAE2BCE2148696900711FCF /* NailTrimViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NailTrimViewController.swift; sourceTree = "<group>"; };
 		DBAE2BD0214899CD00711FCF /* ProviderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderViewController.swift; sourceTree = "<group>"; };
@@ -36,6 +43,9 @@
 		DBDD4925214739010017304F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DBDD4928214739010017304F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DBDD492A214739010017304F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DBFDFB97214F747700E2E998 /* employees.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = employees.json; sourceTree = "<group>"; };
+		DBFDFB99214F77AF00E2E998 /* offers.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = offers.json; sourceTree = "<group>"; };
+		FEEE2A35B58A011203F225F4 /* Pods-RabbitHavenServices.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RabbitHavenServices.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RabbitHavenServices/Pods-RabbitHavenServices.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,12 +53,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B25C5AD8D83ADC59582A1A6D /* Pods_RabbitHavenServices.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A1ACF826195CC848EA8FA556 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				849D2D1A7C3B74B502E49EC0 /* Pods_RabbitHavenServices.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		ABCF0C01E43FFC6002B77A29 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				FEEE2A35B58A011203F225F4 /* Pods-RabbitHavenServices.debug.xcconfig */,
+				76A0D4334B681EDD1B0EEB79 /* Pods-RabbitHavenServices.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		DB216B49214CB68D004818B1 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -61,6 +89,7 @@
 			isa = PBXGroup;
 			children = (
 				DB216B4C214CB7DB004818B1 /* ServiceDataModel.swift */,
+				DB32EC5F214E2AF9003A412D /* BookingDataModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -82,6 +111,8 @@
 			children = (
 				DBDD491A214739000017304F /* RabbitHavenServices */,
 				DBDD4919214739000017304F /* Products */,
+				ABCF0C01E43FFC6002B77A29 /* Pods */,
+				A1ACF826195CC848EA8FA556 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -105,6 +136,8 @@
 				DBDD4922214739000017304F /* RabbitHavenServices.xcdatamodeld */,
 				DB216B4E214CBAEC004818B1 /* Constants.swift */,
 				DB32EC4B214DADAA003A412D /* Utils.swift */,
+				DBFDFB97214F747700E2E998 /* employees.json */,
+				DBFDFB99214F77AF00E2E998 /* offers.json */,
 			);
 			path = RabbitHavenServices;
 			sourceTree = "<group>";
@@ -116,9 +149,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DBDD492D214739010017304F /* Build configuration list for PBXNativeTarget "RabbitHavenServices" */;
 			buildPhases = (
+				BD0B5F23AD1BE5E72364D5BA /* [CP] Check Pods Manifest.lock */,
 				DBDD4914214739000017304F /* Sources */,
 				DBDD4915214739000017304F /* Frameworks */,
 				DBDD4916214739000017304F /* Resources */,
+				E9772A0FEA2E0F540A7D425F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -168,18 +203,62 @@
 			buildActionMask = 2147483647;
 			files = (
 				DB54F2D62149D0A8009C85E3 /* Main.storyboard in Resources */,
+				DBFDFB98214F747700E2E998 /* employees.json in Resources */,
 				DBDD4929214739010017304F /* LaunchScreen.storyboard in Resources */,
+				DBFDFB9A214F77AF00E2E998 /* offers.json in Resources */,
 				DBDD4926214739010017304F /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		BD0B5F23AD1BE5E72364D5BA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-RabbitHavenServices-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E9772A0FEA2E0F540A7D425F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-RabbitHavenServices/Pods-RabbitHavenServices-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RabbitHavenServices/Pods-RabbitHavenServices-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		DBDD4914214739000017304F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB32EC60214E2AF9003A412D /* BookingDataModel.swift in Sources */,
 				DBAE2BCF2148696900711FCF /* NailTrimViewController.swift in Sources */,
 				DBAE2BD321489CF300711FCF /* TimeViewController.swift in Sources */,
 				DB32EC4C214DADAA003A412D /* Utils.swift in Sources */,
@@ -330,6 +409,7 @@
 		};
 		DBDD492E214739010017304F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FEEE2A35B58A011203F225F4 /* Pods-RabbitHavenServices.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -349,6 +429,7 @@
 		};
 		DBDD492F214739010017304F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 76A0D4334B681EDD1B0EEB79 /* Pods-RabbitHavenServices.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

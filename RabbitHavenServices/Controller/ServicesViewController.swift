@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class ServicesViewController: UIViewController {
 
@@ -21,6 +22,9 @@ class ServicesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     
+        getProviderData()
+        getServicesData()
+        
         serviceDataModel.donation = 5
         serviceDataModel.duration = 10
         serviceDataModel.donationUSD = 5.00
@@ -58,6 +62,40 @@ class ServicesViewController: UIViewController {
         if segue.identifier == "goToTimeFromServices" {
             let vcTime = segue.destination as? TimeViewController
             vcTime?.serviceDataModel = serviceDataModel
+        }
+    }
+    
+    func getProviderData() {
+        if let path = Bundle.main.path(forResource: "employees", ofType: "json") {
+            do {
+                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .alwaysMapped)
+                let json = try JSON(data: data)
+                let arrayNames = json["Employees"].arrayValue.map({$0["name"].stringValue})
+                for name in arrayNames {
+                    print(name)
+                }
+            } catch let error {
+                print("parse error: \(error.localizedDescription)")
+            }
+        } else {
+            print("Invalid filename/path.")
+        }
+    }
+    
+    func getServicesData() {
+        if let path = Bundle.main.path(forResource: "offers", ofType: "json") {
+            do {
+                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .alwaysMapped)
+                let json = try JSON(data: data)
+                let arrayNames = json["Offers"].arrayValue.map({$0["name"].stringValue})
+                for name in arrayNames {
+                    print(name)
+                }
+            } catch let error {
+                print("parse error: \(error.localizedDescription)")
+            }
+        } else {
+            print("Invalid filename/path.")
         }
     }
 }

@@ -25,4 +25,7 @@ class Constants {
     static var DOLLAR_SIGN = "$"
     static var S = "s"
     
+    enum Types {
+        case Organization, Person, Offer
+    }
 }
