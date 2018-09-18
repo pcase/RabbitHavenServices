@@ -8,9 +8,12 @@
 
 import UIKit
 import SwiftyJSON
+import RealmSwift
 
 class ServicesViewController: UIViewController {
 
+    let realm = try! Realm()
+    
     var serviceDataModel = ServiceDataModel()
     
     @IBOutlet weak var nailTrimButton: UIButton!
@@ -22,8 +25,10 @@ class ServicesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        getProviderData()
-        getServicesData()
+        print(Realm.Configuration.defaultConfiguration.fileURL)
+        
+        saveProviders()
+        saveServices()
         
         serviceDataModel.donation = 5
         serviceDataModel.duration = 10
@@ -64,38 +69,61 @@ class ServicesViewController: UIViewController {
             vcTime?.serviceDataModel = serviceDataModel
         }
     }
-    
-    func getProviderData() {
-        if let path = Bundle.main.path(forResource: "employees", ofType: "json") {
-            do {
-                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .alwaysMapped)
-                let json = try JSON(data: data)
-                let arrayNames = json["Employees"].arrayValue.map({$0["name"].stringValue})
-                for name in arrayNames {
-                    print(name)
+
+    func saveProviders() {
+        do {
+            try realm.write {
+                if let path = Bundle.main.path(forResource: "employees", ofType: "json") {
+                    do {
+                        let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .alwaysMapped)
+                        let json = try JSON(data: data)
+                        
+                        for (_, object) in json["Employees"] {
+                            let newProvider = Provider()
+                            newProvider.name = object["name"].stringValue
+                            newProvider.detail = object["description"].stringValue
+                            newProvider.image = object["image"].stringValue
+                            realm.add(newProvider)
+                        }
+                    } catch let error {
+                        print("parse error: \(error.localizedDescription)")
+                    }
+                } else {
+                    print("Invalid filename/path.")
                 }
-            } catch let error {
-                print("parse error: \(error.localizedDescription)")
             }
-        } else {
-            print("Invalid filename/path.")
+        } catch {
+            print("Error initializing new realm, \(error)")
         }
     }
     
-    func getServicesData() {
-        if let path = Bundle.main.path(forResource: "offers", ofType: "json") {
-            do {
-                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .alwaysMapped)
-                let json = try JSON(data: data)
-                let arrayNames = json["Offers"].arrayValue.map({$0["name"].stringValue})
-                for name in arrayNames {
-                    print(name)
+    func saveServices() {
+        do {
+            try realm.write {
+                
+                if let path = Bundle.main.path(forResource: "offers", ofType: "json") {
+                    do {
+                        let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .alwaysMapped)
+                        let json = try JSON(data: data)
+                        
+                        for (_, object) in json["Offers"] {
+                            let newService = Service()
+                            newService.name = object["name"].stringValue
+                            newService.detail = object["description"].stringValue
+                            newService.image = object["image"].stringValue
+                            newService.price = object["price"].intValue
+                            newService.priceCurrency = object["priceCurrency"].stringValue
+                            realm.add(newService)
+                        }
+                    } catch let error {
+                        print("parse error: \(error.localizedDescription)")
+                    }
+                } else {
+                    print("Invalid filename/path.")
                 }
-            } catch let error {
-                print("parse error: \(error.localizedDescription)")
             }
-        } else {
-            print("Invalid filename/path.")
+        } catch {
+            print("Error initializing new realm, \(error)")
         }
     }
 }
