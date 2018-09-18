@@ -29,12 +29,6 @@ class ServicesViewController: UIViewController {
         
         saveProviders()
         saveServices()
-        
-        serviceDataModel.donation = 5
-        serviceDataModel.duration = 10
-        serviceDataModel.donationUSD = 5.00
-        serviceDataModel.provider = "anyprovider"
-        serviceDataModel.quantity = 1
    }
 
     override func didReceiveMemoryWarning() {
@@ -42,15 +36,18 @@ class ServicesViewController: UIViewController {
     }
 
     @IBAction func nailTrimTapped(_ sender: UIButton) {
-        serviceDataModel.service = Constants.NAIL_TRIMS
+        let service = getServiceByName(name: Constants.NAIL_TRIMS_1_RABBIT)
+        serviceDataModel = initServiceDataModel(service: service)
     }
 
     @IBAction func homeHealthChecksTapped(_ sender: UIButton) {
-        serviceDataModel.service = Constants.HOME_HEALTH_CHECKS
+        let service = getServiceByName(name: Constants.HOME_HEALTH_CHECKS_DEMONSTRATION_NAME)
+        serviceDataModel = initServiceDataModel(service: service)
     }
 
     @IBAction func bunnyHopTapped(_ sender: UIButton) {
-        serviceDataModel.service = Constants.BUNNY_HOP
+        let service = getServiceByName(name: Constants.BUNNY_HOP_PLAYTIME_NAME)
+        serviceDataModel = initServiceDataModel(service: service)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -125,5 +122,22 @@ class ServicesViewController: UIViewController {
         } catch {
             print("Error initializing new realm, \(error)")
         }
+    }
+    
+    func getServiceByName(name: String) -> Service {
+        let realm = try! Realm()
+        let serviceList = realm.objects(Service.self).filter("name == %@", name)
+        return serviceList.first!
+    }
+    
+    func initServiceDataModel(service: Service) -> ServiceDataModel {
+        serviceDataModel = ServiceDataModel()
+        serviceDataModel.donation = (service.price)
+        serviceDataModel.duration = Constants.DURATION_TIME
+        serviceDataModel.donationUSD = Float(serviceDataModel.donation)
+        serviceDataModel.provider = ""
+        serviceDataModel.quantity = 1
+        serviceDataModel.service = service.name
+        return serviceDataModel
     }
 }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class NailTrimViewController: UIViewController {
 
@@ -33,7 +34,6 @@ class NailTrimViewController: UIViewController {
         stepper.maximumValue = 6
         
         serviceDataModel.updateServiceData(quantity: 1)
-        
         rabbitLabel.text = Utils.intToString(num: 1) + Constants.SPACE + Constants.RABBIT
         donationLabel.text = Constants.DOLLAR_SIGN + Utils.intToString(num: serviceDataModel.donation)
         durationLabel.text = Utils.intToString(num: serviceDataModel.duration) + Constants.SPACE + Constants.MINUTES
@@ -55,7 +55,7 @@ class NailTrimViewController: UIViewController {
         }
         
         serviceDataModel.updateServiceData(quantity: quantity)
-        
+        serviceDataModel.service = getServiceByQuantity(quantity: quantity).name
         donationLabel.text = Constants.DOLLAR_SIGN + String(serviceDataModel.donation)
         durationLabel.text = String(serviceDataModel.duration) + Constants.SPACE + Constants.MINUTES
         usdLabel.text = Utils.floatToString(num: serviceDataModel.donationUSD)
@@ -66,5 +66,30 @@ class NailTrimViewController: UIViewController {
             let vcProvider = segue.destination as? ProviderViewController
             vcProvider?.serviceDataModel = serviceDataModel
         }
+    }
+    
+    func getServiceByQuantity(quantity: Int) -> Service {
+        let realm = try! Realm()
+        
+        var service : String = ""
+        switch quantity {
+        case 1:
+            service = Constants.NAIL_TRIMS_1_RABBIT
+        case 2:
+            service = Constants.NAIL_TRIMS_2_RABBITS_NAME
+        case 3:
+            service = Constants.NAIL_TRIMS_3_RABBITS_NAME
+        case 4:
+            service = Constants.NAIL_TRIMS_4_RABBITS_NAME
+        case 5:
+            service = Constants.NAIL_TRIMS_5_RABBITS_NAME
+        case 6:
+            service = Constants.NAIL_TRIMS_6_RABBITS_NAME
+        default:
+            print("Error: Invalid quantity")
+        }
+        
+        let serviceList = realm.objects(Service.self).filter("name == %@", service)
+        return serviceList.first!
     }
 }
