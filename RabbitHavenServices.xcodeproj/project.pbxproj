@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B25C5AD8D83ADC59582A1A6D /* Pods_RabbitHavenServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 849D2D1A7C3B74B502E49EC0 /* Pods_RabbitHavenServices.framework */; };
-		DB216B4D214CB7DB004818B1 /* ServiceDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB216B4C214CB7DB004818B1 /* ServiceDataModel.swift */; };
+		DB216B4D214CB7DB004818B1 /* Booking.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB216B4C214CB7DB004818B1 /* Booking.swift */; };
 		DB216B4F214CBAEC004818B1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB216B4E214CBAEC004818B1 /* Constants.swift */; };
 		DB32EC4C214DADAA003A412D /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB32EC4B214DADAA003A412D /* Utils.swift */; };
 		DB32EC60214E2AF9003A412D /* BookingDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB32EC5F214E2AF9003A412D /* BookingDataModel.swift */; };
@@ -30,7 +30,7 @@
 /* Begin PBXFileReference section */
 		76A0D4334B681EDD1B0EEB79 /* Pods-RabbitHavenServices.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RabbitHavenServices.release.xcconfig"; path = "Pods/Target Support Files/Pods-RabbitHavenServices/Pods-RabbitHavenServices.release.xcconfig"; sourceTree = "<group>"; };
 		849D2D1A7C3B74B502E49EC0 /* Pods_RabbitHavenServices.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RabbitHavenServices.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		DB216B4C214CB7DB004818B1 /* ServiceDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceDataModel.swift; sourceTree = "<group>"; };
+		DB216B4C214CB7DB004818B1 /* Booking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Booking.swift; sourceTree = "<group>"; };
 		DB216B4E214CBAEC004818B1 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		DB32EC4B214DADAA003A412D /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		DB32EC5F214E2AF9003A412D /* BookingDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookingDataModel.swift; sourceTree = "<group>"; };
@@ -92,7 +92,7 @@
 		DB216B4A214CB6BC004818B1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				DB216B4C214CB7DB004818B1 /* ServiceDataModel.swift */,
+				DB216B4C214CB7DB004818B1 /* Booking.swift */,
 				DB32EC5F214E2AF9003A412D /* BookingDataModel.swift */,
 				DB6B23F121505AFC00E0D442 /* Service.swift */,
 				DB6B23F32150695B00E0D442 /* Provider.swift */,
@@ -274,7 +274,7 @@
 				DB32EC4C214DADAA003A412D /* Utils.swift in Sources */,
 				DB6B23F42150695B00E0D442 /* Provider.swift in Sources */,
 				DBAE2BD1214899CD00711FCF /* ProviderViewController.swift in Sources */,
-				DB216B4D214CB7DB004818B1 /* ServiceDataModel.swift in Sources */,
+				DB216B4D214CB7DB004818B1 /* Booking.swift in Sources */,
 				DBDD491E214739000017304F /* ServicesViewController.swift in Sources */,
 				DBDD491C214739000017304F /* AppDelegate.swift in Sources */,
 				DB6B23F221505AFC00E0D442 /* Service.swift in Sources */,

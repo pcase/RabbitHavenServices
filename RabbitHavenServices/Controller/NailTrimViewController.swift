@@ -8,10 +8,15 @@
 
 import UIKit
 import RealmSwift
+import Alamofire
+import SwiftyJSON
 
 class NailTrimViewController: UIViewController {
 
-    var serviceDataModel = ServiceDataModel()
+    let COMPANY = "azurehorsecreations"
+    let BOOKING_URL = "https://user-api.simplybook.me/"
+    let API_KEY = "0fb8587f79818d57abe68fb821dab098a33dc8ce6f75aa7e74a40c69079915de"
+    var booking = Booking()
     
     @IBOutlet weak var nextButton: UIButton!
     
@@ -27,17 +32,27 @@ class NailTrimViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        
+
+        let parameters: Parameters = [
+            "jsonrpc": "2.0",
+            "method": "getEventList",
+            "params": [],
+            "id":1
+        ]
+        getEventList(url: BOOKING_URL, parameters: parameters)
         
         stepper.wraps = true
         stepper.autorepeat = true
         stepper.minimumValue = 1
         stepper.maximumValue = 6
         
-        serviceDataModel.updateServiceData(quantity: 1)
+        booking.updateServiceData(quantity: 1)
         rabbitLabel.text = Utils.intToString(num: 1) + Constants.SPACE + Constants.RABBIT
-        donationLabel.text = Constants.DOLLAR_SIGN + Utils.intToString(num: serviceDataModel.donation)
-        durationLabel.text = Utils.intToString(num: serviceDataModel.duration) + Constants.SPACE + Constants.MINUTES
-        usdLabel.text = Utils.floatToString(num: serviceDataModel.donationUSD)
+        donationLabel.text = Constants.DOLLAR_SIGN + Utils.intToString(num: booking.donation)
+        durationLabel.text = Utils.intToString(num: booking.duration) + Constants.SPACE + Constants.MINUTES
+        usdLabel.text = Utils.floatToString(num: booking.donationUSD)
     }
 
     override func didReceiveMemoryWarning() {
@@ -54,17 +69,17 @@ class NailTrimViewController: UIViewController {
             rabbitLabel.text = String(quantity) + Constants.SPACE + Constants.RABBIT
         }
         
-        serviceDataModel.updateServiceData(quantity: quantity)
-        serviceDataModel.service = getServiceByQuantity(quantity: quantity).name
-        donationLabel.text = Constants.DOLLAR_SIGN + String(serviceDataModel.donation)
-        durationLabel.text = String(serviceDataModel.duration) + Constants.SPACE + Constants.MINUTES
-        usdLabel.text = Utils.floatToString(num: serviceDataModel.donationUSD)
+        booking.updateServiceData(quantity: quantity)
+        booking.service = getServiceByQuantity(quantity: quantity).name
+        donationLabel.text = Constants.DOLLAR_SIGN + String(booking.donation)
+        durationLabel.text = String(booking.duration) + Constants.SPACE + Constants.MINUTES
+        usdLabel.text = Utils.floatToString(num: booking.donationUSD)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToProvider" {
             let vcProvider = segue.destination as? ProviderViewController
-            vcProvider?.serviceDataModel = serviceDataModel
+            vcProvider?.booking = booking
         }
     }
     
@@ -91,5 +106,78 @@ class NailTrimViewController: UIViewController {
         
         let serviceList = realm.objects(Service.self).filter("name == %@", service)
         return serviceList.first!
+    }
+    
+    func getEventList(url: String, parameters: Parameters) {
+        
+        var parameters : [String:Any] = [:]
+        var token = ""
+        
+        // Get the token
+        parameters = ["jsonrpc":"2.0",
+                    "method":"getToken",
+                    "params":[COMPANY,API_KEY],
+                    "id":1
+        ]
+        
+        Alamofire.request(BOOKING_URL + "/login/", method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { response in
+            if response.result.isSuccess {
+                print("Success! Got the token")
+                let json : JSON = JSON(response.result.value!)
+                print(json)
+                token = json["result"].string!
+                print("token = " + token)
+                
+                
+                // Get the event list (services)
+                let headers = ["Content-Type":"application/json; charset=UTF-8",
+                               "X-Company-Login":self.COMPANY,
+                               "X-Token":token
+                ]
+                
+                parameters = ["jsonrpc":"2.0",
+                              "method":"getEventList",
+                              "params":[],
+                              "id":1
+                ]
+                
+                Alamofire.request(self.BOOKING_URL, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+                    if response.result.isSuccess {
+                        print("Success! Got the event list")
+                        let json : JSON = JSON(response.result.value!)
+                        print(json)
+                    }
+                    else {
+                        print("Error \(response.result.error)")
+                    }
+                }
+                
+                // Get the service providers
+                let headers2 = ["Content-Type":"application/json; charset=UTF-8",
+                           "X-Company-Login":self.COMPANY,
+                           "X-Token":token
+                ]
+
+                parameters = ["jsonrpc":"2.0",
+                              "method":"getUnitList",
+                              "params":[],
+                              "id":2
+                ]
+
+                Alamofire.request(self.BOOKING_URL, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers2).responseJSON { response in
+                    if response.result.isSuccess {
+                        print("Success! Got the unit list")
+                        let json : JSON = JSON(response.result.value!)
+                        print(json)
+                    }
+                    else {
+                        print("Error \(response.result.error)")
+                    }
+                }
+            }
+            else {
+                print("Error \(response.result.error)")
+            }
+        }
     }
 }

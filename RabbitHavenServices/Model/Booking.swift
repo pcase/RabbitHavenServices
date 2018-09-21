@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ServiceDataModel {
+class Booking {
     
     var service  : String = ""
     var provider : String = ""

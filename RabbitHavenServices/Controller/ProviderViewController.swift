@@ -10,7 +10,7 @@ import UIKit
 
 class ProviderViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    var serviceDataModel = ServiceDataModel()
+    var booking = Booking()
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -52,7 +52,7 @@ class ProviderViewController: UIViewController, UITableViewDataSource, UITableVi
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToTime" {
             let vcTime = segue.destination as? TimeViewController
-            vcTime?.serviceDataModel = serviceDataModel
+            vcTime?.booking = booking
         }
     }
 }

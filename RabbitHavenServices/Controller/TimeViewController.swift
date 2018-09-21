@@ -10,7 +10,7 @@ import UIKit
 
 class TimeViewController: UIViewController {
     
-    var serviceDataModel = ServiceDataModel()
+    var booking = Booking()
     
     @IBOutlet weak var serviceLabel: UILabel!
     
@@ -21,24 +21,13 @@ class TimeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        serviceLabel.text = serviceDataModel.service
-        donationAmount.text = Constants.DOLLAR_SIGN + Utils.intToString(num: serviceDataModel.donation)
-        USDAmount.text = Utils.floatToString(num: serviceDataModel.donationUSD)
+        serviceLabel.text = booking.service
+        donationAmount.text = Constants.DOLLAR_SIGN + Utils.intToString(num: booking.donation)
+        USDAmount.text = Utils.floatToString(num: booking.donationUSD)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

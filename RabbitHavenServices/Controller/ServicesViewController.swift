@@ -9,12 +9,13 @@
 import UIKit
 import SwiftyJSON
 import RealmSwift
+import Alamofire
 
 class ServicesViewController: UIViewController {
 
     let realm = try! Realm()
     
-    var serviceDataModel = ServiceDataModel()
+    var booking = Booking()
     
     @IBOutlet weak var nailTrimButton: UIButton!
 
@@ -37,33 +38,33 @@ class ServicesViewController: UIViewController {
 
     @IBAction func nailTrimTapped(_ sender: UIButton) {
         let service = getServiceByName(name: Constants.NAIL_TRIMS_1_RABBIT)
-        serviceDataModel = initServiceDataModel(service: service)
+        booking = initServiceDataModel(service: service)
     }
 
     @IBAction func homeHealthChecksTapped(_ sender: UIButton) {
         let service = getServiceByName(name: Constants.HOME_HEALTH_CHECKS_DEMONSTRATION_NAME)
-        serviceDataModel = initServiceDataModel(service: service)
+        booking = initServiceDataModel(service: service)
     }
 
     @IBAction func bunnyHopTapped(_ sender: UIButton) {
         let service = getServiceByName(name: Constants.BUNNY_HOP_PLAYTIME_NAME)
-        serviceDataModel = initServiceDataModel(service: service)
+        booking = initServiceDataModel(service: service)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToNailTrims" {
             let vcNailTrim = segue.destination as? NailTrimViewController
-            vcNailTrim?.serviceDataModel = serviceDataModel
+            vcNailTrim?.booking = booking
         }
 
         if segue.identifier == "goToProviderFromServices" {
             let vcProvider = segue.destination as? ProviderViewController
-            vcProvider?.serviceDataModel = serviceDataModel
+            vcProvider?.booking = booking
         }
 
         if segue.identifier == "goToTimeFromServices" {
             let vcTime = segue.destination as? TimeViewController
-            vcTime?.serviceDataModel = serviceDataModel
+            vcTime?.booking = booking
         }
     }
 
@@ -130,14 +131,14 @@ class ServicesViewController: UIViewController {
         return serviceList.first!
     }
     
-    func initServiceDataModel(service: Service) -> ServiceDataModel {
-        serviceDataModel = ServiceDataModel()
-        serviceDataModel.donation = (service.price)
-        serviceDataModel.duration = Constants.DURATION_TIME
-        serviceDataModel.donationUSD = Float(serviceDataModel.donation)
-        serviceDataModel.provider = ""
-        serviceDataModel.quantity = 1
-        serviceDataModel.service = service.name
-        return serviceDataModel
+    func initServiceDataModel(service: Service) -> Booking {
+        booking = Booking()
+        booking.donation = (service.price)
+        booking.duration = Constants.DURATION_TIME
+        booking.donationUSD = Float(booking.donation)
+        booking.provider = ""
+        booking.quantity = 1
+        booking.service = service.name
+        return booking
     }
 }
