@@ -1,5 +1,5 @@
 //
-//  Service.swift
+//  Provider.swift
 //  RabbitHavenServices
 //
 //  Created by Patty Case on 9/17/18.
@@ -9,10 +9,8 @@
 import Foundation
 import RealmSwift
 
-class Service: Object {
+class ProviderDB: Object {
     @objc dynamic var name  : String = ""
     @objc dynamic var detail : String = ""
     @objc dynamic var image : String = ""
-    @objc dynamic var price : Int = 0
-    @objc dynamic var priceCurrency : String = ""
 }

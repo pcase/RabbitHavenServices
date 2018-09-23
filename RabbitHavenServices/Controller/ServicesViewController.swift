@@ -77,7 +77,7 @@ class ServicesViewController: UIViewController {
                         let json = try JSON(data: data)
                         
                         for (_, object) in json["Employees"] {
-                            let newProvider = Provider()
+                            let newProvider = ProviderDB()
                             newProvider.name = object["name"].stringValue
                             newProvider.detail = object["description"].stringValue
                             newProvider.image = object["image"].stringValue
@@ -105,7 +105,7 @@ class ServicesViewController: UIViewController {
                         let json = try JSON(data: data)
                         
                         for (_, object) in json["Offers"] {
-                            let newService = Service()
+                            let newService = ServiceDB()
                             newService.name = object["name"].stringValue
                             newService.detail = object["description"].stringValue
                             newService.image = object["image"].stringValue
@@ -125,13 +125,13 @@ class ServicesViewController: UIViewController {
         }
     }
     
-    func getServiceByName(name: String) -> Service {
+    func getServiceByName(name: String) -> ServiceDB {
         let realm = try! Realm()
-        let serviceList = realm.objects(Service.self).filter("name == %@", name)
+        let serviceList = realm.objects(ServiceDB.self).filter("name == %@", name)
         return serviceList.first!
     }
     
-    func initServiceDataModel(service: Service) -> Booking {
+    func initServiceDataModel(service: ServiceDB) -> Booking {
         booking = Booking()
         booking.donation = (service.price)
         booking.duration = Constants.DURATION_TIME
