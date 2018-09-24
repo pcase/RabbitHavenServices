@@ -13,10 +13,8 @@ import SwiftyJSON
 
 class NailTrimViewController: UIViewController {
 
-    let COMPANY = "azurehorsecreations"
-    let BOOKING_URL = "https://user-api.simplybook.me/"
-    let API_KEY = "0fb8587f79818d57abe68fb821dab098a33dc8ce6f75aa7e74a40c69079915de"
     var booking = Booking()
+    
     fileprivate var request: AnyObject?
     
     @IBOutlet weak var nextButton: UIButton!
@@ -34,7 +32,9 @@ class NailTrimViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        fetchService()
+        let token = getToken()
+        print(token)
+//        getServices()
 
 //        let parameters: Parameters = [
 //            "jsonrpc": "2.0",
@@ -110,16 +110,60 @@ class NailTrimViewController: UIViewController {
 //        return nil
 //    }
     
-    func fetchService() {
-        let serviceResource = ServiceResource()
-        let serviceRequest = ApiRequest(resource: serviceResource)
-        request = serviceRequest
-        serviceRequest.load { [weak self] (services) in
-            guard let ss = services, let topService = ss?.items.first else {
-                return
-            }
-            print(topService.title)
+    func getToken(){
+        let networkLayer: NetworkLayer = NetworkLayer()
+        
+        let parameters : [String: Any] = ["jsonrpc":"2.0",
+                    "method":Constants.GET_TOKEN_METHOD,
+                    "params":[Constants.COMPANY, Constants.API_KEY],
+                    "id":1
+            ]
+        
+        let successHandler: ((Token)) -> Void = { (token) in
+            print(token)
         }
+        let errorHandler: (String) -> Void = { (error) in
+            print(error)
+        }
+        
+        networkLayer.post(urlString: Constants.LOGIN_URL, headers: [:], parameters: parameters, successHandler: successHandler, errorHandler: errorHandler)
+    }
+    
+    func getServices() {
+        let networkLayer: NetworkLayer = NetworkLayer()
+        
+        let token = ""
+    
+        let headers : [String: String] = ["Content-Type":"application/json; charset=UTF-8",
+                       "X-Company-Login":Constants.COMPANY,
+                       "X-Token":token
+        ]
+
+        let parameters : [String: Any] = ["jsonrpc":"2.0",
+                      "method":"getEventList",
+                      "params":[],
+                      "id":1
+        ]
+        
+        let successHandler: ((Services)) -> Void = { (services) in
+            print(services.items.first?.title)
+        }
+        let errorHandler: (String) -> Void = { (error) in
+            print(error)
+        }
+        
+        networkLayer.post(urlString: Constants.BASE_URL, headers: headers, parameters: parameters, successHandler: successHandler, errorHandler: errorHandler)
+        
+        
+//        let serviceResource = ServiceResource()
+//        let serviceRequest = ApiRequest(resource: serviceResource)
+//        request = serviceRequest
+//        serviceRequest.load { [weak self] (services) in
+//            guard let ss = services, let topService = ss?.items.first else {
+//                return
+//            }
+//            print(topService.title)
+//        }
     }
     
 //    func getEventList(url: String, parameters: Parameters) {

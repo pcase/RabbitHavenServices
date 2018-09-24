@@ -22,6 +22,8 @@
 		DB6B23F221505AFC00E0D442 /* ServiceDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6B23F121505AFC00E0D442 /* ServiceDB.swift */; };
 		DB6B23F42150695B00E0D442 /* ProviderDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6B23F32150695B00E0D442 /* ProviderDB.swift */; };
 		DB6CEC4521580C600095BE72 /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6CEC4421580C600095BE72 /* NetworkController.swift */; };
+		DB6CEC4B215866F90095BE72 /* NetworkLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6CEC4A215866F90095BE72 /* NetworkLayer.swift */; };
+		DB6CEC4D21588A2F0095BE72 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6CEC4C21588A2F0095BE72 /* Token.swift */; };
 		DBAE2BCF2148696900711FCF /* NailTrimViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBAE2BCE2148696900711FCF /* NailTrimViewController.swift */; };
 		DBAE2BD1214899CD00711FCF /* ProviderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBAE2BD0214899CD00711FCF /* ProviderViewController.swift */; };
 		DBAE2BD321489CF300711FCF /* TimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBAE2BD221489CF300711FCF /* TimeViewController.swift */; };
@@ -51,6 +53,8 @@
 		DB6B23F121505AFC00E0D442 /* ServiceDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceDB.swift; sourceTree = "<group>"; };
 		DB6B23F32150695B00E0D442 /* ProviderDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderDB.swift; sourceTree = "<group>"; };
 		DB6CEC4421580C600095BE72 /* NetworkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
+		DB6CEC4A215866F90095BE72 /* NetworkLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLayer.swift; sourceTree = "<group>"; };
+		DB6CEC4C21588A2F0095BE72 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		DBAE2BCE2148696900711FCF /* NailTrimViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NailTrimViewController.swift; sourceTree = "<group>"; };
 		DBAE2BD0214899CD00711FCF /* ProviderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderViewController.swift; sourceTree = "<group>"; };
 		DBAE2BD221489CF300711FCF /* TimeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeViewController.swift; sourceTree = "<group>"; };
@@ -110,12 +114,14 @@
 				DB32EC5F214E2AF9003A412D /* BookingDataModel.swift */,
 				DB6B23F121505AFC00E0D442 /* ServiceDB.swift */,
 				DB6B23F32150695B00E0D442 /* ProviderDB.swift */,
+				DB6CEC4C21588A2F0095BE72 /* Token.swift */,
 				DB057A2A21574832001A5B67 /* Servjce.swift */,
 				DB057A2C215749D3001A5B67 /* Provider.swift */,
 				DB057A38215768A9001A5B67 /* ApiResource.swift */,
 				DB057A2E21574D5E001A5B67 /* ServiceResource.swift */,
 				DB057A3021574D6A001A5B67 /* ProviderResource.swift */,
 				DB057A3221576472001A5B67 /* NetworkRequest.swift */,
+				DB6CEC4A215866F90095BE72 /* NetworkLayer.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -297,12 +303,14 @@
 				DB057A2D215749D3001A5B67 /* Provider.swift in Sources */,
 				DB32EC4C214DADAA003A412D /* Utils.swift in Sources */,
 				DB057A2B21574832001A5B67 /* Servjce.swift in Sources */,
+				DB6CEC4B215866F90095BE72 /* NetworkLayer.swift in Sources */,
 				DB6B23F42150695B00E0D442 /* ProviderDB.swift in Sources */,
 				DBAE2BD1214899CD00711FCF /* ProviderViewController.swift in Sources */,
 				DB057A2F21574D5E001A5B67 /* ServiceResource.swift in Sources */,
 				DB216B4D214CB7DB004818B1 /* Booking.swift in Sources */,
 				DBDD491E214739000017304F /* ServicesViewController.swift in Sources */,
 				DBDD491C214739000017304F /* AppDelegate.swift in Sources */,
+				DB6CEC4D21588A2F0095BE72 /* Token.swift in Sources */,
 				DB6B23F221505AFC00E0D442 /* ServiceDB.swift in Sources */,
 				DBDD4924214739000017304F /* RabbitHavenServices.xcdatamodeld in Sources */,
 				DB057A3321576472001A5B67 /* NetworkRequest.swift in Sources */,

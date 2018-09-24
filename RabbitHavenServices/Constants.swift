@@ -10,7 +10,7 @@ import Foundation
 
 class Constants {
     
-    // MARK: - Services
+    // MARK: - Rabbit Haven constants
     static var NAIL_TRIMS = "Nail Trims"
     static var NAIL_TRIMS_1_RABBIT = "Nail Trim & Scent Gland Cleaning for 1 Rabbit (FOLT)"
     static var NAIL_TRIMS_2_RABBITS_NAME = "Nail Trim & Scent Gland Cleaning for 2 Rabbits (FOLT)"
@@ -25,6 +25,11 @@ class Constants {
     static var DONATION_AMOUNT = 5
     static var DONATION_AMOUNT_USD = 5.00
     static var DURATION_TIME = 10
+    static var COMPANY = "azurehorsecreations"
+    static var BASE_URL = "https://user-api.simplybook.me/"
+    static var LOGIN_URL = BASE_URL + "/login"
+    static var API_KEY = "0fb8587f79818d57abe68fb821dab098a33dc8ce6f75aa7e74a40c69079915de"
+    static var GET_TOKEN_METHOD = "getToken"
     
     // MARK: - Strings
     static var SPACE = " "
@@ -32,7 +37,7 @@ class Constants {
     static var MINUTES = "minutes"
     static var DOLLAR_SIGN = "$"
     static var S = "s"
-    
+
     enum Types {
         case Organization, Person, Offer
     }

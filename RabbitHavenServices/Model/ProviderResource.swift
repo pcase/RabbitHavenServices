@@ -8,8 +8,11 @@
 
 import Foundation
 
+let providerUrl = baseUrl + questionPath + "?" + order + "&" + sorting + "&" + tags + "&" + site
+
 struct ProviderResource: ApiResource {
     let methodPath = "/getUnitList"
+    var url : URL = URL(string: providerUrl)!
     
     func makeModel(data: Data) -> Provider? {
         let decoder = JSONDecoder()

@@ -8,8 +8,18 @@
 
 import Foundation
 
+let baseUrl = "https://api.stackexchange.com/2.2"
+let site = "site=stackoverflow"
+let order = "order=desc"
+let sorting = "sort=votes"
+let tags = "tagged=ios"
+let questionPath = "/questions"
+let serviceUrl = baseUrl + questionPath + "?" + order + "&" + sorting + "&" + tags + "&" + site
+
 struct ServiceResource: ApiResource {
-    let methodPath = "/questions"
+
+    let methodPath = questionPath
+    var url : URL = URL(string: serviceUrl)!
     
     func makeModel(data: Data) -> Services? {
         let decoder = JSONDecoder()
