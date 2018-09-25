@@ -32,17 +32,7 @@ class NailTrimViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let token = getToken()
-        print(token)
-//        getServices()
-
-//        let parameters: Parameters = [
-//            "jsonrpc": "2.0",
-//            "method": "getEventList",
-//            "params": [],
-//            "id":1
-//        ]
-//        getEventList(url: BOOKING_URL, parameters: parameters)
+        getServices()
         
         stepper.wraps = true
         stepper.autorepeat = true
@@ -110,7 +100,7 @@ class NailTrimViewController: UIViewController {
 //        return nil
 //    }
     
-    func getToken(){
+    func getToken() {
         let networkLayer: NetworkLayer = NetworkLayer()
         
         let parameters : [String: Any] = ["jsonrpc":"2.0",
@@ -122,38 +112,78 @@ class NailTrimViewController: UIViewController {
         let successHandler: ((Token)) -> Void = { (token) in
             print(token)
         }
+        
         let errorHandler: (String) -> Void = { (error) in
             print(error)
         }
         
-        networkLayer.post(urlString: Constants.LOGIN_URL, headers: [:], parameters: parameters, successHandler: successHandler, errorHandler: errorHandler)
+        networkLayer.request(httpMethod: Constants.POST, urlString: Constants.LOGIN_URL, headers: [:], parameters: parameters, successHandler: successHandler, errorHandler: errorHandler)
     }
     
     func getServices() {
         let networkLayer: NetworkLayer = NetworkLayer()
         
-        let token = ""
-    
-        let headers : [String: String] = ["Content-Type":"application/json; charset=UTF-8",
-                       "X-Company-Login":Constants.COMPANY,
-                       "X-Token":token
-        ]
-
-        let parameters : [String: Any] = ["jsonrpc":"2.0",
-                      "method":"getEventList",
-                      "params":[],
-                      "id":1
+        // Get the token
+        var parameters : [String: Any] = ["jsonrpc":"2.0",
+                                          "method":Constants.GET_TOKEN_METHOD,
+                                          "params":[Constants.COMPANY, Constants.API_KEY],
+                                          "id":1
         ]
         
-        let successHandler: ((Services)) -> Void = { (services) in
-            print(services.items.first?.title)
+        let successHandler: ((Token)) -> Void = { (token) in
+            print(token)
+            
+            let headers : [String: String] = ["Content-Type":"application/json; charset=UTF-8",
+                                              "X-Company-Login":Constants.COMPANY,
+                                              "X-Token":token.result
+            ]
+            
+            parameters = ["jsonrpc":"2.0",
+                        "method":"getEventList",
+                        "params":[],
+                        "id":1
+            ]
+            
+            let successHandler: ((Services)) -> Void = { (service) in
+                print(service.result["1"]?.name)
+            }
+            
+            let errorHandler: (String) -> Void = { (error) in
+                print(error)
+            }
+            
+            networkLayer.request(httpMethod: Constants.POST, urlString: Constants.BASE_URL, headers: headers, parameters: parameters, successHandler: successHandler, errorHandler: errorHandler)
         }
+        
         let errorHandler: (String) -> Void = { (error) in
             print(error)
         }
         
-        networkLayer.post(urlString: Constants.BASE_URL, headers: headers, parameters: parameters, successHandler: successHandler, errorHandler: errorHandler)
+        networkLayer.request(httpMethod: Constants.POST, urlString: Constants.LOGIN_URL, headers: [:], parameters: parameters, successHandler: successHandler, errorHandler: errorHandler)
         
+//        let networkLayer: NetworkLayer = NetworkLayer()
+//
+//        let token = ""
+//
+//        let headers : [String: String] = ["Content-Type":"application/json; charset=UTF-8",
+//                       "X-Company-Login":Constants.COMPANY,
+//                       "X-Token":token
+//        ]
+//
+//        let parameters : [String: Any] = ["jsonrpc":"2.0",
+//                      "method":"getEventList",
+//                      "params":[],
+//                      "id":1
+//        ]
+//
+//        let successHandler: ((Services)) -> Void = { (services) in
+//            print(services.items.first?.title)
+//        }
+//        let errorHandler: (String) -> Void = { (error) in
+//            print(error)
+//        }
+//
+//        networkLayer.request(httpMethod: Constants.POST, urlString: Constants.BASE_URL, headers: headers, parameters: parameters, successHandler: successHandler, errorHandler: errorHandler)
         
 //        let serviceResource = ServiceResource()
 //        let serviceRequest = ApiRequest(resource: serviceResource)

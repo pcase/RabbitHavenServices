@@ -8,20 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		B25C5AD8D83ADC59582A1A6D /* Pods_RabbitHavenServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 849D2D1A7C3B74B502E49EC0 /* Pods_RabbitHavenServices.framework */; };
-		DB057A2B21574832001A5B67 /* Servjce.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB057A2A21574832001A5B67 /* Servjce.swift */; };
 		DB057A2D215749D3001A5B67 /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB057A2C215749D3001A5B67 /* Provider.swift */; };
-		DB057A2F21574D5E001A5B67 /* ServiceResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB057A2E21574D5E001A5B67 /* ServiceResource.swift */; };
-		DB057A3121574D6A001A5B67 /* ProviderResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB057A3021574D6A001A5B67 /* ProviderResource.swift */; };
-		DB057A3321576472001A5B67 /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB057A3221576472001A5B67 /* NetworkRequest.swift */; };
-		DB057A39215768A9001A5B67 /* ApiResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB057A38215768A9001A5B67 /* ApiResource.swift */; };
+		DB08029721596F8300442633 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB08029621596F8300442633 /* Errors.swift */; };
+		DB08029D2159CAD000442633 /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB08029C2159CAD000442633 /* Services.swift */; };
 		DB216B4D214CB7DB004818B1 /* Booking.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB216B4C214CB7DB004818B1 /* Booking.swift */; };
 		DB216B4F214CBAEC004818B1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB216B4E214CBAEC004818B1 /* Constants.swift */; };
 		DB32EC4C214DADAA003A412D /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB32EC4B214DADAA003A412D /* Utils.swift */; };
 		DB32EC60214E2AF9003A412D /* BookingDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB32EC5F214E2AF9003A412D /* BookingDataModel.swift */; };
 		DB54F2D62149D0A8009C85E3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB54F2D42149D0A8009C85E3 /* Main.storyboard */; };
-		DB6B23F221505AFC00E0D442 /* ServiceDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6B23F121505AFC00E0D442 /* ServiceDB.swift */; };
-		DB6B23F42150695B00E0D442 /* ProviderDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6B23F32150695B00E0D442 /* ProviderDB.swift */; };
-		DB6CEC4521580C600095BE72 /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6CEC4421580C600095BE72 /* NetworkController.swift */; };
 		DB6CEC4B215866F90095BE72 /* NetworkLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6CEC4A215866F90095BE72 /* NetworkLayer.swift */; };
 		DB6CEC4D21588A2F0095BE72 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6CEC4C21588A2F0095BE72 /* Token.swift */; };
 		DBAE2BCF2148696900711FCF /* NailTrimViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBAE2BCE2148696900711FCF /* NailTrimViewController.swift */; };
@@ -39,20 +33,14 @@
 /* Begin PBXFileReference section */
 		76A0D4334B681EDD1B0EEB79 /* Pods-RabbitHavenServices.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RabbitHavenServices.release.xcconfig"; path = "Pods/Target Support Files/Pods-RabbitHavenServices/Pods-RabbitHavenServices.release.xcconfig"; sourceTree = "<group>"; };
 		849D2D1A7C3B74B502E49EC0 /* Pods_RabbitHavenServices.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RabbitHavenServices.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		DB057A2A21574832001A5B67 /* Servjce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Servjce.swift; sourceTree = "<group>"; };
 		DB057A2C215749D3001A5B67 /* Provider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Provider.swift; sourceTree = "<group>"; };
-		DB057A2E21574D5E001A5B67 /* ServiceResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceResource.swift; sourceTree = "<group>"; };
-		DB057A3021574D6A001A5B67 /* ProviderResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderResource.swift; sourceTree = "<group>"; };
-		DB057A3221576472001A5B67 /* NetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
-		DB057A38215768A9001A5B67 /* ApiResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiResource.swift; sourceTree = "<group>"; };
+		DB08029621596F8300442633 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		DB08029C2159CAD000442633 /* Services.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
 		DB216B4C214CB7DB004818B1 /* Booking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Booking.swift; sourceTree = "<group>"; };
 		DB216B4E214CBAEC004818B1 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		DB32EC4B214DADAA003A412D /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		DB32EC5F214E2AF9003A412D /* BookingDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookingDataModel.swift; sourceTree = "<group>"; };
 		DB54F2D52149D0A8009C85E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		DB6B23F121505AFC00E0D442 /* ServiceDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceDB.swift; sourceTree = "<group>"; };
-		DB6B23F32150695B00E0D442 /* ProviderDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderDB.swift; sourceTree = "<group>"; };
-		DB6CEC4421580C600095BE72 /* NetworkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
 		DB6CEC4A215866F90095BE72 /* NetworkLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLayer.swift; sourceTree = "<group>"; };
 		DB6CEC4C21588A2F0095BE72 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		DBAE2BCE2148696900711FCF /* NailTrimViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NailTrimViewController.swift; sourceTree = "<group>"; };
@@ -112,15 +100,9 @@
 			children = (
 				DB216B4C214CB7DB004818B1 /* Booking.swift */,
 				DB32EC5F214E2AF9003A412D /* BookingDataModel.swift */,
-				DB6B23F121505AFC00E0D442 /* ServiceDB.swift */,
-				DB6B23F32150695B00E0D442 /* ProviderDB.swift */,
 				DB6CEC4C21588A2F0095BE72 /* Token.swift */,
-				DB057A2A21574832001A5B67 /* Servjce.swift */,
 				DB057A2C215749D3001A5B67 /* Provider.swift */,
-				DB057A38215768A9001A5B67 /* ApiResource.swift */,
-				DB057A2E21574D5E001A5B67 /* ServiceResource.swift */,
-				DB057A3021574D6A001A5B67 /* ProviderResource.swift */,
-				DB057A3221576472001A5B67 /* NetworkRequest.swift */,
+				DB08029C2159CAD000442633 /* Services.swift */,
 				DB6CEC4A215866F90095BE72 /* NetworkLayer.swift */,
 			);
 			path = Model;
@@ -134,7 +116,6 @@
 				DBAE2BCE2148696900711FCF /* NailTrimViewController.swift */,
 				DBAE2BD0214899CD00711FCF /* ProviderViewController.swift */,
 				DBAE2BD221489CF300711FCF /* TimeViewController.swift */,
-				DB6CEC4421580C600095BE72 /* NetworkController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -168,6 +149,7 @@
 				DBDD492A214739010017304F /* Info.plist */,
 				DBDD4922214739000017304F /* RabbitHavenServices.xcdatamodeld */,
 				DB216B4E214CBAEC004818B1 /* Constants.swift */,
+				DB08029621596F8300442633 /* Errors.swift */,
 				DB32EC4B214DADAA003A412D /* Utils.swift */,
 				DBFDFB97214F747700E2E998 /* employees.json */,
 				DBFDFB99214F77AF00E2E998 /* offers.json */,
@@ -296,25 +278,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				DB32EC60214E2AF9003A412D /* BookingDataModel.swift in Sources */,
-				DB6CEC4521580C600095BE72 /* NetworkController.swift in Sources */,
 				DBAE2BCF2148696900711FCF /* NailTrimViewController.swift in Sources */,
-				DB057A3121574D6A001A5B67 /* ProviderResource.swift in Sources */,
 				DBAE2BD321489CF300711FCF /* TimeViewController.swift in Sources */,
 				DB057A2D215749D3001A5B67 /* Provider.swift in Sources */,
 				DB32EC4C214DADAA003A412D /* Utils.swift in Sources */,
-				DB057A2B21574832001A5B67 /* Servjce.swift in Sources */,
 				DB6CEC4B215866F90095BE72 /* NetworkLayer.swift in Sources */,
-				DB6B23F42150695B00E0D442 /* ProviderDB.swift in Sources */,
 				DBAE2BD1214899CD00711FCF /* ProviderViewController.swift in Sources */,
-				DB057A2F21574D5E001A5B67 /* ServiceResource.swift in Sources */,
 				DB216B4D214CB7DB004818B1 /* Booking.swift in Sources */,
 				DBDD491E214739000017304F /* ServicesViewController.swift in Sources */,
 				DBDD491C214739000017304F /* AppDelegate.swift in Sources */,
 				DB6CEC4D21588A2F0095BE72 /* Token.swift in Sources */,
-				DB6B23F221505AFC00E0D442 /* ServiceDB.swift in Sources */,
 				DBDD4924214739000017304F /* RabbitHavenServices.xcdatamodeld in Sources */,
-				DB057A3321576472001A5B67 /* NetworkRequest.swift in Sources */,
-				DB057A39215768A9001A5B67 /* ApiResource.swift in Sources */,
+				DB08029D2159CAD000442633 /* Services.swift in Sources */,
+				DB08029721596F8300442633 /* Errors.swift in Sources */,
 				DB216B4F214CBAEC004818B1 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

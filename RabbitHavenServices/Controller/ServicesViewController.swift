@@ -17,6 +17,9 @@ class ServicesViewController: UIViewController {
     
     var booking = Booking()
     
+    var serviceList: [Service] = []
+    var serviceDictionary: [String:Service] = [:]
+    
     @IBOutlet weak var nailTrimButton: UIButton!
 
     @IBOutlet weak var homeHealthCheckButton: UIButton!
@@ -26,10 +29,7 @@ class ServicesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        print(Realm.Configuration.defaultConfiguration.fileURL)
-        
-        saveProviders()
-        saveServices()
+        getServices()
    }
 
     override func didReceiveMemoryWarning() {
@@ -37,18 +37,15 @@ class ServicesViewController: UIViewController {
     }
 
     @IBAction func nailTrimTapped(_ sender: UIButton) {
-        let service = getServiceByName(name: Constants.NAIL_TRIMS_1_RABBIT)
-        booking = initServiceDataModel(service: service)
+        booking = initServiceDataModel(name: Constants.NAIL_TRIMS)
     }
 
     @IBAction func homeHealthChecksTapped(_ sender: UIButton) {
-        let service = getServiceByName(name: Constants.HOME_HEALTH_CHECKS_DEMONSTRATION_NAME)
-        booking = initServiceDataModel(service: service)
+        booking = initServiceDataModel(name: Constants.HOME_HEALTH_CHECKS)
     }
 
     @IBAction func bunnyHopTapped(_ sender: UIButton) {
-        let service = getServiceByName(name: Constants.BUNNY_HOP_PLAYTIME_NAME)
-        booking = initServiceDataModel(service: service)
+        booking = initServiceDataModel(name: Constants.BUNNY_HOP)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -67,78 +64,60 @@ class ServicesViewController: UIViewController {
             vcTime?.booking = booking
         }
     }
-
-    func saveProviders() {
-        do {
-            try realm.write {
-                if let path = Bundle.main.path(forResource: "employees", ofType: "json") {
-                    do {
-                        let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .alwaysMapped)
-                        let json = try JSON(data: data)
-                        
-                        for (_, object) in json["Employees"] {
-                            let newProvider = ProviderDB()
-                            newProvider.name = object["name"].stringValue
-                            newProvider.detail = object["description"].stringValue
-                            newProvider.image = object["image"].stringValue
-                            realm.add(newProvider)
-                        }
-                    } catch let error {
-                        print("parse error: \(error.localizedDescription)")
-                    }
-                } else {
-                    print("Invalid filename/path.")
-                }
-            }
-        } catch {
-            print("Error initializing new realm, \(error)")
-        }
-    }
     
-    func saveServices() {
-        do {
-            try realm.write {
-                
-                if let path = Bundle.main.path(forResource: "offers", ofType: "json") {
-                    do {
-                        let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .alwaysMapped)
-                        let json = try JSON(data: data)
-                        
-                        for (_, object) in json["Offers"] {
-                            let newService = ServiceDB()
-                            newService.name = object["name"].stringValue
-                            newService.detail = object["description"].stringValue
-                            newService.image = object["image"].stringValue
-                            newService.price = object["price"].intValue
-                            newService.priceCurrency = object["priceCurrency"].stringValue
-                            realm.add(newService)
-                        }
-                    } catch let error {
-                        print("parse error: \(error.localizedDescription)")
-                    }
-                } else {
-                    print("Invalid filename/path.")
-                }
-            }
-        } catch {
-            print("Error initializing new realm, \(error)")
-        }
-    }
-    
-    func getServiceByName(name: String) -> ServiceDB {
-        let realm = try! Realm()
-        let serviceList = realm.objects(ServiceDB.self).filter("name == %@", name)
-        return serviceList.first!
-    }
-    
-    func initServiceDataModel(service: ServiceDB) -> Booking {
+    func initServiceDataModel(name: String) -> Booking {
+        let service = serviceDictionary[name]
         booking = Booking()
-        booking.donation = (service.price)
+        booking.donation = (service?.price_without_tax)!
         booking.duration = Constants.DURATION_TIME
         booking.donationUSD = Float(booking.donation)
         booking.provider = ""
         booking.quantity = 1
-        booking.service = service.name
+        booking.service = (service?.name)!
         return booking
+    }
+    
+    func getServices() {
+        let networkLayer: NetworkLayer = NetworkLayer()
+        
+        // Get the token
+        var parameters : [String: Any] = ["jsonrpc":"2.0",
+                                          "method":Constants.GET_TOKEN_METHOD,
+                                          "params":[Constants.COMPANY, Constants.API_KEY],
+                                          "id":1
+        ]
+        
+        let successHandler: ((Token)) -> Void = { (token) in
+            print(token)
+            
+            let headers : [String: String] = ["Content-Type":"application/json; charset=UTF-8",
+                                              "X-Company-Login":Constants.COMPANY,
+                                              "X-Token":token.result
+            ]
+            
+            parameters = ["jsonrpc":"2.0",
+                          "method":"getEventList",
+                          "params":[],
+                          "id":1
+            ]
+            
+            let successHandler: ((Services)) -> Void = { (service) in
+                var numberOfResults = service.result.count
+                for (key,value) in service.result {
+                    self.serviceDictionary[value.name] = value
+                }
+            }
+            let errorHandler: (String) -> Void = { (error) in
+                print(error)
+            }
+            
+            networkLayer.request(httpMethod: Constants.POST, urlString: Constants.BASE_URL, headers: headers, parameters: parameters, successHandler: successHandler, errorHandler: errorHandler)
+        }
+        
+        let errorHandler: (String) -> Void = { (error) in
+            print(error)
+        }
+        
+        networkLayer.request(httpMethod: Constants.POST, urlString: Constants.LOGIN_URL, headers: [:], parameters: parameters, successHandler: successHandler, errorHandler: errorHandler)
     }
 }

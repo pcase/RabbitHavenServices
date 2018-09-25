@@ -14,44 +14,9 @@ typealias NetworkCompletionHandler = (Data?, URLResponse?, Error?) -> Void
 typealias ErrorHandler = (String) -> Void
 
 class NetworkLayer {
-    static let genericError = "Something went wrong. Please try again later"
     
-    func get<T: Decodable>(urlString: String,
-                           headers: [String: String] = [:],
-                           successHandler: @escaping (T) -> Void,
-                           errorHandler: @escaping ErrorHandler) {
-        
-        let completionHandler: NetworkCompletionHandler = { (data, urlResponse, error) in
-            if let error = error {
-                print(error.localizedDescription)
-                errorHandler(NetworkLayer.genericError)
-                return
-            }
-            
-            if self.isSuccessCode(urlResponse) {
-                guard let data = data else {
-                    print("Unable to parse the response in given type \(T.self)")
-                    return errorHandler(NetworkLayer.genericError)
-                }
-                if let responseObject = try? JSONDecoder().decode(T.self, from: data) {
-                    successHandler(responseObject)
-                    return
-                }
-            }
-            errorHandler(NetworkLayer.genericError)
-        }
-        
-        guard let url = URL(string: urlString) else {
-            return errorHandler("Unable to create URL from given string")
-        }
-        var request = URLRequest(url: url)
-        request.allHTTPHeaderFields = headers
-        URLSession.shared.dataTask(with: request,
-                                   completionHandler: completionHandler)
-            .resume()
-    }
-    
-    func post<T: Decodable>(urlString: String,
+    func request<T: Decodable>(httpMethod: String,
+                            urlString: String,
                             headers: [String: String] = [:],
                             parameters: [String: Any] = [:],
                             successHandler: @escaping (T) -> Void,
@@ -60,32 +25,34 @@ class NetworkLayer {
         let completionHandler: NetworkCompletionHandler = { (data, urlResponse, error) in
             if let error = error {
                 print(error.localizedDescription)
-                errorHandler(NetworkLayer.genericError)
+                errorHandler(Errors.GENERIC_ERROR)
                 return
             }
             
             if self.isSuccessCode(urlResponse) {
                 guard let data = data else {
-                    print("Unable to parse the response in given type \(T.self)")
-                    return errorHandler(NetworkLayer.genericError)
+                    print(Errors.PARSE_RESPONSE_ERROR)
+                    return errorHandler(Errors.GENERIC_ERROR)
                 }
                 if let responseObject = try? JSONDecoder().decode(T.self, from: data) {
                     successHandler(responseObject)
                     return
+                } else {
+                    print(data)
+                    return errorHandler(Errors.DECODING_RESPONSE_ERROR)
                 }
             }
-            errorHandler(NetworkLayer.genericError)
         }
+        
         guard let url = URL(string: urlString) else {
-            return errorHandler("Unable to create URL from given string")
+            return errorHandler(Errors.URL_CREATION_ERROR)
         }
         
         var request = URLRequest(url: url)
         request.timeoutInterval = 90
-        request.httpMethod = "POST"
+        request.httpMethod = httpMethod
         request.allHTTPHeaderFields = headers
-        request.allHTTPHeaderFields?["Content-Type"] = "application/json"
-
+        
         let jsonData = try? JSONSerialization.data(withJSONObject: parameters, options: [])
         request.httpBody = jsonData
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
