@@ -7,17 +7,10 @@
 //
 
 import UIKit
-import SwiftyJSON
-import RealmSwift
-import Alamofire
 
 class ServicesViewController: UIViewController {
-
-    let realm = try! Realm()
     
     var booking = Booking()
-    
-    var serviceList: [Service] = []
     var serviceDictionary: [String:Service] = [:]
     
     @IBOutlet weak var nailTrimButton: UIButton!
@@ -88,7 +81,6 @@ class ServicesViewController: UIViewController {
         ]
         
         let successHandler: ((Token)) -> Void = { (token) in
-            print(token)
             
             let headers : [String: String] = ["Content-Type":"application/json; charset=UTF-8",
                                               "X-Company-Login":Constants.COMPANY,
