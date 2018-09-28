@@ -11,20 +11,38 @@ import UIKit
 class ProviderViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     var booking = Booking()
+    var providerDictionary: [String:Provider] = [:]
     
     @IBOutlet weak var tableView: UITableView!
     
-    let providers = [("Bridgitte"), ("bunnyhop"), ("Debbie"), ("James"), ("Jennifer"), ("Kyomi"), ("Vicki"), ("anyprovider")]
-    
-    let providersImages = [UIImage(named: "bridgitte.png"), UIImage(named: "bunnyhop.png"), UIImage(named: "debbie.png"), UIImage(named: "james.png"), UIImage(named: "jennifer.png"), UIImage(named: "kyomi.png"), UIImage(named: "vicki.png"), UIImage(named: "anyprovider.png")]
+    struct ProviderNameImage {
+        let name: String
+        let imagePath: String
+    }
 
+    var providerNameImageList = [ProviderNameImage]()
+    
+    func mapProviderDictionaryToStruct(dictionary:  [String:Provider]) -> [ProviderNameImage] {
+        var arr = [ProviderNameImage]()
+        var providerNameImage: ProviderNameImage
+
+        for (key, value) in dictionary {
+            providerNameImage = ProviderNameImage.init(name: value.name, imagePath: Constants.HOST + value.picture_path)
+            arr.append(providerNameImage)
+        }
+
+        return arr
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.dataSource = self
         tableView.delegate = self
+        
+        providerNameImageList = mapProviderDictionaryToStruct(dictionary: providerDictionary)
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -36,13 +54,29 @@ class ProviderViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return providers.count
+        return providerNameImageList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellReuseIdentifier", for: indexPath)
-        cell.textLabel?.text = providers[indexPath.row]
-        cell.imageView?.image = providersImages[indexPath.row]
+        cell.textLabel?.text = providerNameImageList[indexPath.row].name
+   
+        // Download the image
+        let url = URL(string: providerNameImageList[indexPath.row].imagePath)
+        URLSession.shared.dataTask(with: url!, completionHandler: { (data, response, error) in
+
+            if error != nil {
+                print(error!)
+                return
+            }
+
+            DispatchQueue.main.async {
+                cell.imageView?.image = UIImage(data: data!)
+                tableView.reloadData()
+            }
+
+        }).resume()
+
         return cell
     }
     

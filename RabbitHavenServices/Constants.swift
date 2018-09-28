@@ -26,6 +26,7 @@ class Constants {
     static var DONATION_AMOUNT_USD = 5.00
     static var DURATION_TIME = 10
     static var COMPANY = "azurehorsecreations"
+    static var HOST = "http://simplybook.me/"
     static var BASE_URL = "https://user-api.simplybook.me/"
     static var LOGIN_URL = BASE_URL + "/login"
     static var API_KEY = "0fb8587f79818d57abe68fb821dab098a33dc8ce6f75aa7e74a40c69079915de"

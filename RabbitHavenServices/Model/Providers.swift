@@ -22,7 +22,7 @@ struct Providers: Decodable {
 
 struct Provider: Codable {
     //    let file_id: String
-//    let picture_path: String
+    let picture_path: String
     let name: String
     //    let station_id: String
     //    let email: String
@@ -33,8 +33,8 @@ struct Provider: Codable {
     //    let classes_plugin_info: [String:String]
     //    let user: Bool
 //    let position: String?
-//    let picture: String?
-//    let id: String
+    let picture: String?
+    let id: String
 //    let services: [String:String?] = [" ": nil]
 //    let phone: String
 //    let is_visible: String
@@ -43,7 +43,7 @@ struct Provider: Codable {
 
     enum CodingKeys: String, CodingKey {
         //        case file_id = "file_id"
-//        case picture_path = "picture_path"
+        case picture_path = "picture_path"
         case name = "name"
         //        case let station_id = "let station_id"
         //        case email = "email"
@@ -54,8 +54,8 @@ struct Provider: Codable {
 //        case classes_plugin_info = "classes_plugin_info"
 //        case user = false
         //        case position = "position"
-//        case picture = "picture"
-//        case id = "id"
+        case picture = "picture"
+        case id = "id"
 //        case services = "services"
 //        case phone = "phone"
 //        case is_visible = "is_visible"

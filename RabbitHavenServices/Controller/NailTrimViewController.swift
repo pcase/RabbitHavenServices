@@ -31,25 +31,30 @@ class NailTrimViewController: UIViewController {
         super.viewDidLoad()
 
         getProviders()
-        
-        stepper.wraps = true
-        stepper.autorepeat = true
-        stepper.minimumValue = 1
-        stepper.maximumValue = 6
-        
+        initStepper()
         booking.updateServiceData(quantity: 1)
-        rabbitLabel.text = Utils.intToString(num: 1) + Constants.SPACE + Constants.RABBIT
-        donationLabel.text = Constants.DOLLAR_SIGN + Utils.intToString(num: booking.donation)
-        durationLabel.text = Utils.intToString(num: booking.duration) + Constants.SPACE + Constants.MINUTES
-        usdLabel.text = Utils.floatToString(num: booking.donationUSD)
+        updateLabels(quantity: 1, duration: booking.duration, donation: booking.donation, usd: booking.donationUSD)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
+    func initStepper() {
+        stepper.wraps = true
+        stepper.autorepeat = true
+        stepper.minimumValue = 1
+        stepper.maximumValue = 6
+    }
+    
+    func updateLabels(quantity: Int, duration: Int, donation: Int, usd: Float) {
+        rabbitLabel.text = Utils.intToString(num: quantity) + Constants.SPACE + Constants.RABBIT
+        donationLabel.text = Constants.DOLLAR_SIGN + Utils.intToString(num: booking.donation)
+        durationLabel.text = Utils.intToString(num: booking.duration) + Constants.SPACE + Constants.MINUTES
+        usdLabel.text = Utils.floatToString(num: booking.donationUSD)
+    }
+    
     @IBAction func stepperValueChanged(_ sender: UIStepper) {
-
         let quantity : Int = Int(sender.value)
 
         if (quantity > 1) {
@@ -59,16 +64,14 @@ class NailTrimViewController: UIViewController {
         }
 
         booking.updateServiceData(quantity: quantity)
-        booking.service = getServiceByQuantity(quantity: quantity)
-        donationLabel.text = Constants.DOLLAR_SIGN + String(booking.donation)
-        durationLabel.text = String(booking.duration) + Constants.SPACE + Constants.MINUTES
-        usdLabel.text = Utils.floatToString(num: booking.donationUSD)
+        updateLabels(quantity: quantity, duration: booking.duration, donation: booking.duration, usd: booking.donationUSD)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToProvider" {
             let vcProvider = segue.destination as? ProviderViewController
             vcProvider?.booking = booking
+            vcProvider?.providerDictionary = providerDictionary
         }
     }
     
@@ -93,7 +96,6 @@ class NailTrimViewController: UIViewController {
         return service
     }
 
-    
     func getProviders() {
         let networkLayer: NetworkLayer = NetworkLayer()
         
@@ -117,11 +119,10 @@ class NailTrimViewController: UIViewController {
                         "id":2
             ]
             
-            let successHandler: ((Providers)) -> Void = { (provider) in
-                var numberOfResults = provider.result.count
-                for (key,value) in provider.result {
-                    self.providerDictionary[value.name] = value
-                    print(value.name)
+            let successHandler: ((Providers)) -> Void = { (providers) in
+                var numberOfResults = providers.result.count
+                for (key,value) in providers.result {
+                    self.providerDictionary[value.id] = value
                 }
             }
             
