@@ -28,14 +28,14 @@ struct Provider: Codable {
     //    let email: String
     //    let qty: String
     //    let is_active: String
-    let event_map: [String:String?] = [" ": nil]
+    let event_map: [String:String?]
     let description: String
     //    let classes_plugin_info: [String:String]
     //    let user: Bool
 //    let position: String?
     let picture: String?
     let id: String
-//    let services: [String:String?] = [" ": nil]
+    let services: [String:String?]
 //    let phone: String
 //    let is_visible: String
     //    let seo_url: String?
@@ -56,10 +56,43 @@ struct Provider: Codable {
         //        case position = "position"
         case picture = "picture"
         case id = "id"
-//        case services = "services"
+        case services = "services"
 //        case phone = "phone"
 //        case is_visible = "is_visible"
 //        case seo_url = "seo_url"
 //        case picture_sub_path = "picture_sub_path"
+    }
+    
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        self.picture_path = try values.decode(String.self, forKey: .picture_path)
+        self.name = try values.decode(String.self, forKey: .name)
+        self.description = try values.decode(String.self, forKey: .description)
+        self.picture = try values.decode(String.self, forKey: .picture)
+        self.id = try values.decode(String.self, forKey: .id)
+        
+        var event_items: [String: Any] = [:]
+        var event_dict: [String:String] = [:]
+        do {
+            event_items = try values.decode([String:String?].self, forKey: .event_map) as! [String: Any]
+            for key in event_items.keys {
+                event_dict[key] = ""
+            }
+        } catch {
+            print("INFO: provider does not use event_map")
+        }
+        self.event_map = event_dict
+        
+        var service_items: [String: Any] = [:]
+        var service_dict: [String:String] = [:]
+        do {
+            service_items = try values.decode([String:String?].self, forKey: .event_map) as! [String: Any]
+            for key in service_items.keys {
+                service_dict[key] = ""
+            }
+        } catch {
+            print("INFO: provider does not use services")
+        }
+        self.services = service_dict
     }
 }

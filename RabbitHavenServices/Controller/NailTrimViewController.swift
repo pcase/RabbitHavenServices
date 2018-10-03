@@ -122,7 +122,9 @@ class NailTrimViewController: UIViewController {
             let successHandler: ((Providers)) -> Void = { (providers) in
                 var numberOfResults = providers.result.count
                 for (key,value) in providers.result {
-                    self.providerDictionary[value.id] = value
+                    if (self.booking.providerIds.contains(value.id)) {
+                        self.providerDictionary[value.id] = value
+                    }
                 }
             }
             

@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Services: Decodable {
+struct Services: Codable {
     let id: String
     let result:[String:Service]
     let jsonrpc: String
@@ -33,18 +33,18 @@ struct Service: Codable {
     let description: String
     let price: String
 //    let position: String
-    let picture: String
+//    let picture: String
     //    let show_tax: Bool
 //    let is_public: String
     //    let buffertime_before: String
     let currency: String
     //    let buffertime_after: String
     let id: String
-    let unit_map: [String:String?] = [" ": nil]
+    let unit_map: [String:String?]
     //    let is_visible: String
 //    let seo_url: String?
     let duration: String
-    let picture_sub_path: String
+//    let picture_sub_path: String
     
     enum CodingKeys: String, CodingKey {
         //        case file_id = "file_id"
@@ -59,7 +59,7 @@ struct Service: Codable {
         case description = "description"
         case price = "price"
 //        case position = "position"
-        case picture = "picture"
+//        case picture = "picture"
         //        case show_tax = "show_tax"
         //        case is_public = "is_public"
         //        case buffertime_before = "buffertime_before"
@@ -70,33 +70,30 @@ struct Service: Codable {
         //        case is_visible = "is_visible"
 //        case seo_url = "seo_url"
         case duration = "duration"
-        case picture_sub_path = "picture_sub_path"
+//        case picture_sub_path = "picture_sub_path"
     }
     
-    //    init(from decoder: Decoder) {
-    //        file_id = ""
-    //        picture_path = ""
-    //        price_without_tax = 0
-    //        name = ""
-    //        hide_duration = ""
-    //        is_recurring = ""
-    //        is_active = ""
-    //        price_with_tax = 0
-    //        classes_plugin_info = [:]
-    //        description = ""
-    //        price  = ""
-    //        position = ""
-    //        picture = ""
-    //        show_tax = false
-    //        is_public = ""
-    //        buffertime_before = ""
-    //        currency = ""
-    //        buffertime_after = ""
-    //        id = ""
-    //        unit_map = [:]
-    //        is_visible = ""
-    //        seo_url = ""
-    //        duration = ""
-    //        picture_sub_path = ""
-    //   }
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        self.price_without_tax = try values.decode(Int.self, forKey: .price_without_tax)
+        self.name = try values.decode(String.self, forKey: .name)
+        self.picture_path = try values.decode(String.self, forKey: .picture_path)
+        self.description = try values.decode(String.self, forKey: .description)
+        self.price = try values.decode(String.self, forKey: .price)
+        self.currency = try values.decode(String.self, forKey: .currency)
+        self.id = try values.decode(String.self, forKey: .id)
+        self.duration = try values.decode(String.self, forKey: .duration)
+        
+        var items: [String: Any] = [:]
+        var dict: [String:String] = [:]
+        do {
+            items = try values.decode([String:String?].self, forKey: .unit_map) as! [String: Any]
+            for key in items.keys {
+                dict[key] = ""
+            }
+        } catch {
+            print("INFO: service does not use unit_map")
+        }
+        self.unit_map = dict
+    }
 }

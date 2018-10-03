@@ -67,9 +67,14 @@ class ServicesViewController: UIViewController {
         booking.provider = ""
         booking.quantity = 1
         booking.service = (service?.name)!
+        
+        for (key, value) in (service?.unit_map)! {
+            booking.providerIds.append(key)
+        }
+        
         return booking
     }
-    
+
     func getServices() {
         let networkLayer: NetworkLayer = NetworkLayer()
         
@@ -94,6 +99,7 @@ class ServicesViewController: UIViewController {
             ]
             
             let successHandler: ((Services)) -> Void = { (service) in
+                print(service.result)
                 var numberOfResults = service.result.count
                 for (key,value) in service.result {
                     self.serviceDictionary[value.name] = value
