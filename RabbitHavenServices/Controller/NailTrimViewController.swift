@@ -48,7 +48,11 @@ class NailTrimViewController: UIViewController {
     }
     
     func updateLabels(quantity: Int, duration: Int, donation: Int, usd: Float) {
-        rabbitLabel.text = Utils.intToString(num: quantity) + Constants.SPACE + Constants.RABBIT
+        if (quantity == 1) {
+            rabbitLabel.text = Utils.intToString(num: quantity) + Constants.SPACE + Constants.RABBIT
+        } else {
+            rabbitLabel.text = Utils.intToString(num: quantity) + Constants.SPACE + Constants.RABBITS
+        }
         donationLabel.text = Constants.DOLLAR_SIGN + Utils.intToString(num: booking.donation)
         durationLabel.text = Utils.intToString(num: booking.duration) + Constants.SPACE + Constants.MINUTES
         usdLabel.text = Utils.floatToString(num: booking.donationUSD)

@@ -35,6 +35,7 @@ class Constants {
     // MARK: - Strings
     static var SPACE = " "
     static var RABBIT = "Rabbit"
+    static var RABBITS = "Rabbits"
     static var MINUTES = "minutes"
     static var DOLLAR_SIGN = "$"
     static var S = "s"
