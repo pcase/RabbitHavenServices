@@ -68,7 +68,7 @@ class ServicesViewController: UIViewController {
         booking.quantity = 1
         booking.service = (service?.name)!
         
-        for (key, value) in (service?.unit_map)! {
+        for (key, _) in (service?.unit_map)! {
             booking.providerIds.append(key)
         }
         
