@@ -15,12 +15,10 @@ class CalendarModel {
     
     var delegate: CalendarDelgate?
     
-    func arrayOfDates() -> NSArray {
+    func arrayOfDates(numberOfDays: Int) -> NSArray {
         
-        let numberOfDays: Int = 14
         let startDate = Date()
         let formatter: DateFormatter = DateFormatter()
-//        formatter.dateFormat = "EEE d/M"
         formatter.dateFormat = "M/d"
         let calendar = Calendar.current
         var offset = DateComponents()
@@ -33,5 +31,14 @@ class CalendarModel {
             dates.append(nextDayString)
         }
         return dates as NSArray
+    }
+    
+    func arrayOfTimes(numberOfTimeSlots: Int) -> NSArray {
+        var times: [String] = []
+        var timeSlots: [String] = ["1:00", "1:10", "1:20", "1:30", "1:40", "1:50", "2:00", "2:10", "2:20", "2:30", "2:40", "2:50", "3:00"]
+        for i in 1..<numberOfTimeSlots {
+            times.append(timeSlots[i])
+        }
+        return times as NSArray
     }
 }

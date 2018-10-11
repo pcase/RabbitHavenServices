@@ -18,6 +18,7 @@ class ProviderViewController: UIViewController, UITableViewDataSource, UITableVi
     struct ProviderNameImage {
         let name: String
         let imagePath: String
+        let id: String
     }
 
     var providerNameImageList = [ProviderNameImage]()
@@ -26,8 +27,8 @@ class ProviderViewController: UIViewController, UITableViewDataSource, UITableVi
         var arr = [ProviderNameImage]()
         var providerNameImage: ProviderNameImage
 
-        for (key, value) in dictionary {
-            providerNameImage = ProviderNameImage.init(name: value.name, imagePath: Constants.HOST + value.picture_path)
+        for (_, value) in dictionary {
+            providerNameImage = ProviderNameImage.init(name: value.name, imagePath: Constants.HOST + value.picture_path, id: value.id)
             arr.append(providerNameImage)
         }
 
@@ -81,6 +82,7 @@ class ProviderViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        booking.providerId = providerNameImageList[indexPath.row].id
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

@@ -23,6 +23,7 @@ class TimeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     var currentDate = Date()
     var calendarArray: NSArray?
     var selectedDate: Int = 0
+    var bookingDate = Date()
     
     func getCalendar() -> CalendarModel {
         
@@ -35,8 +36,8 @@ class TimeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        self.calendarArray = getCalendar().arrayOfDates()
-        
+        let numberOfTimes = 7
+        self.calendarArray = getCalendar().arrayOfTimes(numberOfTimeSlots: numberOfTimes)
         let indexPathForFirstRow = IndexPath(row: 0, section: 0)
         self.calendarCollectionView.selectItem(at: indexPathForFirstRow, animated: false, scrollPosition: [])
         self.collectionView(self.calendarCollectionView, didSelectItemAt: indexPathForFirstRow)
@@ -50,6 +51,7 @@ class TimeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         USDAmount.text = Utils.floatToString(num: booking.donationUSD)
         
         // Get first working day
+        getFirstWorkingDay(providerId: booking.providerId)
         
         // Get available time slots
         
@@ -117,11 +119,60 @@ class TimeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         }
         
         self.selectedDateLabel.text = self.calendarArray?[indexPath.row] as! String?
+        
+        let alertController = UIAlertController(title: self.selectedDateLabel.text, message:
+            "Book it!", preferredStyle: UIAlertControllerStyle.alert)
+        alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,handler: nil))
+        
+        self.present(alertController, animated: true, completion: nil)
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
 
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as! CalendarViewCell
-        cell.dateLabel!.textColor = UIColor.black
+        cell.dateLabel!.textColor = UIColor.white
+    }
+    
+    func getFirstWorkingDay(providerId: String) {
+        let networkLayer: NetworkLayer = NetworkLayer()
+        
+        // Get the token
+        var parameters : [String: Any] = ["jsonrpc":"2.0",
+                                          "method":Constants.GET_TOKEN_METHOD,
+                                          "params":[Constants.COMPANY, Constants.API_KEY],
+                                          "id":1
+        ]
+        
+        let successHandler: ((Token)) -> Void = { (token) in
+            
+            let headers : [String: String] = ["Content-Type":"application/json; charset=UTF-8",
+                                              "X-Company-Login":Constants.COMPANY,
+                                              "X-Token":token.result
+            ]
+            
+            parameters = ["jsonrpc":"2.0",
+                          "method":"getFirstWorkingDay",
+                          "params":["1"],
+                          "id":providerId
+            ]
+            
+            let successHandler: ((FirstWorkingDay)) -> Void = { (firstWorkingDay) in
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yy-mm-dd"
+                dateFormatter.timeZone = TimeZone(abbreviation: "GMT+0:00")
+                self.bookingDate = dateFormatter.date(from: firstWorkingDay.result) ?? Date()
+            }
+            let errorHandler: (String) -> Void = { (error) in
+                print(error)
+            }
+            
+            networkLayer.request(httpMethod: Constants.POST, urlString: Constants.BASE_URL, headers: headers, parameters: parameters, successHandler: successHandler, errorHandler: errorHandler)
+        }
+        
+        let errorHandler: (String) -> Void = { (error) in
+            print(error)
+        }
+        
+        networkLayer.request(httpMethod: Constants.POST, urlString: Constants.LOGIN_URL, headers: [:], parameters: parameters, successHandler: successHandler, errorHandler: errorHandler)
     }
 }
