@@ -24,6 +24,8 @@ class TimeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     var calendarArray: NSArray?
     var selectedDate: Int = 0
     var bookingDate = Date()
+    var bookingDateString = ""
+    var startTimes : [String:[String]] = ["":[]]
     
     func getCalendar() -> CalendarModel {
         
@@ -54,6 +56,7 @@ class TimeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         getFirstWorkingDay(providerId: booking.providerId)
         
         // Get available time slots
+//        getStartTimeMatrix(date: bookingDateString, serviceId: bookingDateString, providerId: booking.providerId)
         
         // Display available time slots
         
@@ -152,8 +155,8 @@ class TimeViewController: UIViewController, UICollectionViewDelegate, UICollecti
             
             parameters = ["jsonrpc":"2.0",
                           "method":"getFirstWorkingDay",
-                          "params":["1"],
-                          "id":providerId
+                          "params":[providerId],
+                          "id":3
             ]
             
             let successHandler: ((FirstWorkingDay)) -> Void = { (firstWorkingDay) in
@@ -161,7 +164,52 @@ class TimeViewController: UIViewController, UICollectionViewDelegate, UICollecti
                 dateFormatter.dateFormat = "yy-mm-dd"
                 dateFormatter.timeZone = TimeZone(abbreviation: "GMT+0:00")
                 self.bookingDate = dateFormatter.date(from: firstWorkingDay.result) ?? Date()
+                self.bookingDateString = firstWorkingDay.result
+                print(self.bookingDateString)
+                self.getStartTimeMatrix(date: self.bookingDateString, serviceId: self.bookingDateString, providerId: self.booking.providerId)
             }
+            let errorHandler: (String) -> Void = { (error) in
+                print(error)
+            }
+            
+            networkLayer.request(httpMethod: Constants.POST, urlString: Constants.BASE_URL, headers: headers, parameters: parameters, successHandler: successHandler, errorHandler: errorHandler)
+        }
+        
+        let errorHandler: (String) -> Void = { (error) in
+            print(error)
+        }
+        
+        networkLayer.request(httpMethod: Constants.POST, urlString: Constants.LOGIN_URL, headers: [:], parameters: parameters, successHandler: successHandler, errorHandler: errorHandler)
+    }
+    
+    func getStartTimeMatrix(date: String, serviceId: String, providerId: String) {
+        let networkLayer: NetworkLayer = NetworkLayer()
+        
+        // Get the token
+        var parameters : [String: Any] = ["jsonrpc":"2.0",
+                                          "method":Constants.GET_TOKEN_METHOD,
+                                          "params":[Constants.COMPANY, Constants.API_KEY],
+                                          "id":1
+        ]
+        
+        let successHandler: ((Token)) -> Void = { (token) in
+            
+            let headers : [String: String] = ["Content-Type":"application/json; charset=UTF-8",
+                                              "X-Company-Login":Constants.COMPANY,
+                                              "X-Token":token.result
+            ]
+            
+            parameters = ["jsonrpc":"2.0",
+                          "method":"getStartTimeMatrix",
+                          "params":[date, date, "1", providerId, 1],
+                          "id":8
+            ]
+            
+            let successHandler: ((StartTimeMatrix)) -> Void = { (startTimeMatrix) in
+                self.startTimes = startTimeMatrix.result
+                print(startTimeMatrix.result["0"])
+            }
+            
             let errorHandler: (String) -> Void = { (error) in
                 print(error)
             }

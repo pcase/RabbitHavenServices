@@ -16,6 +16,7 @@
 		DB32EC4C214DADAA003A412D /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB32EC4B214DADAA003A412D /* Utils.swift */; };
 		DB32EC60214E2AF9003A412D /* BookingDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB32EC5F214E2AF9003A412D /* BookingDataModel.swift */; };
 		DB4AC297216EC643007F861A /* FirstWorkingDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4AC296216EC643007F861A /* FirstWorkingDay.swift */; };
+		DB4AC299216EEB06007F861A /* StartTimeMatrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4AC298216EEB06007F861A /* StartTimeMatrix.swift */; };
 		DB4C1F10215B0F9A00ADE314 /* Providers.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4C1F0F215B0F9A00ADE314 /* Providers.swift */; };
 		DB54F2D62149D0A8009C85E3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB54F2D42149D0A8009C85E3 /* Main.storyboard */; };
 		DB6CEC4B215866F90095BE72 /* NetworkLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6CEC4A215866F90095BE72 /* NetworkLayer.swift */; };
@@ -42,6 +43,7 @@
 		DB32EC4B214DADAA003A412D /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		DB32EC5F214E2AF9003A412D /* BookingDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookingDataModel.swift; sourceTree = "<group>"; };
 		DB4AC296216EC643007F861A /* FirstWorkingDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstWorkingDay.swift; sourceTree = "<group>"; };
+		DB4AC298216EEB06007F861A /* StartTimeMatrix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartTimeMatrix.swift; sourceTree = "<group>"; };
 		DB4C1F0F215B0F9A00ADE314 /* Providers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Providers.swift; sourceTree = "<group>"; };
 		DB54F2D52149D0A8009C85E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DB6CEC4A215866F90095BE72 /* NetworkLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLayer.swift; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 				DB18F4A4216D6D03002CDDAB /* CalendarModel.swift */,
 				DB18F4A6216D7463002CDDAB /* CalendarViewCell.swift */,
 				DB4AC296216EC643007F861A /* FirstWorkingDay.swift */,
+				DB4AC298216EEB06007F861A /* StartTimeMatrix.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -228,6 +231,7 @@
 				DBDD491C214739000017304F /* AppDelegate.swift in Sources */,
 				DB6CEC4D21588A2F0095BE72 /* Token.swift in Sources */,
 				DB18F4A7216D7463002CDDAB /* CalendarViewCell.swift in Sources */,
+				DB4AC299216EEB06007F861A /* StartTimeMatrix.swift in Sources */,
 				DBDD4924214739000017304F /* RabbitHavenServices.xcdatamodeld in Sources */,
 				DB08029D2159CAD000442633 /* Services.swift in Sources */,
 				DB4AC297216EC643007F861A /* FirstWorkingDay.swift in Sources */,
