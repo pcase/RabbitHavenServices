@@ -14,9 +14,7 @@ class ServicesViewController: UIViewController {
     var serviceDictionary: [String:Service] = [:]
     
     @IBOutlet weak var nailTrimButton: UIButton!
-
     @IBOutlet weak var homeHealthCheckButton: UIButton!
-
     @IBOutlet weak var bunnyHopButton: UIButton!
 
     override func viewDidLoad() {
@@ -45,6 +43,11 @@ class ServicesViewController: UIViewController {
         if segue.identifier == "goToNailTrims" {
             let vcNailTrim = segue.destination as? NailTrimViewController
             vcNailTrim?.booking = booking
+        }
+
+        if segue.identifier == "goToHomeHealthCheck" {
+            let vcHomeHealthCheck = segue.destination as? HomeHealthCheckViewController
+            vcHomeHealthCheck?.booking = booking
         }
 
         if segue.identifier == "goToProviderFromServices" {

@@ -15,6 +15,7 @@
 		DB216B4F214CBAEC004818B1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB216B4E214CBAEC004818B1 /* Constants.swift */; };
 		DB32EC4C214DADAA003A412D /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB32EC4B214DADAA003A412D /* Utils.swift */; };
 		DB32EC60214E2AF9003A412D /* BookingDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB32EC5F214E2AF9003A412D /* BookingDataModel.swift */; };
+		DB4291F02177D24B00FD494B /* HomeHealthCheckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4291EF2177D24B00FD494B /* HomeHealthCheckViewController.swift */; };
 		DB4AC297216EC643007F861A /* FirstWorkingDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4AC296216EC643007F861A /* FirstWorkingDay.swift */; };
 		DB4AC299216EEB06007F861A /* StartTimeMatrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4AC298216EEB06007F861A /* StartTimeMatrix.swift */; };
 		DB4C1F10215B0F9A00ADE314 /* Providers.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4C1F0F215B0F9A00ADE314 /* Providers.swift */; };
@@ -42,6 +43,7 @@
 		DB216B4E214CBAEC004818B1 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		DB32EC4B214DADAA003A412D /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		DB32EC5F214E2AF9003A412D /* BookingDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookingDataModel.swift; sourceTree = "<group>"; };
+		DB4291EF2177D24B00FD494B /* HomeHealthCheckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeHealthCheckViewController.swift; sourceTree = "<group>"; };
 		DB4AC296216EC643007F861A /* FirstWorkingDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstWorkingDay.swift; sourceTree = "<group>"; };
 		DB4AC298216EEB06007F861A /* StartTimeMatrix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartTimeMatrix.swift; sourceTree = "<group>"; };
 		DB4C1F0F215B0F9A00ADE314 /* Providers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Providers.swift; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 				DBDD491B214739000017304F /* AppDelegate.swift */,
 				DBDD491D214739000017304F /* ServicesViewController.swift */,
 				DBAE2BCE2148696900711FCF /* NailTrimViewController.swift */,
+				DB4291EF2177D24B00FD494B /* HomeHealthCheckViewController.swift */,
 				DBAE2BD0214899CD00711FCF /* ProviderViewController.swift */,
 				DBAE2BD221489CF300711FCF /* TimeViewController.swift */,
 			);
@@ -236,6 +239,7 @@
 				DB08029D2159CAD000442633 /* Services.swift in Sources */,
 				DB4AC297216EC643007F861A /* FirstWorkingDay.swift in Sources */,
 				DB08029721596F8300442633 /* Errors.swift in Sources */,
+				DB4291F02177D24B00FD494B /* HomeHealthCheckViewController.swift in Sources */,
 				DB216B4F214CBAEC004818B1 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
