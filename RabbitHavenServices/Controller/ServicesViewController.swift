@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class ServicesViewController: UIViewController {
     
@@ -70,7 +71,7 @@ class ServicesViewController: UIViewController {
         booking.provider = ""
         booking.quantity = 1
         booking.service = (service?.name)!
-        
+    
         for (key, _) in (service?.unit_map)! {
             booking.providerIds.append(key)
         }
@@ -79,6 +80,9 @@ class ServicesViewController: UIViewController {
     }
 
     func getServices() {
+        
+        SVProgressHUD.show()
+        
         let networkLayer: NetworkLayer = NetworkLayer()
         
         // Get the token
@@ -102,6 +106,7 @@ class ServicesViewController: UIViewController {
             ]
             
             let successHandler: ((Services)) -> Void = { (service) in
+                SVProgressHUD.dismiss()
                 print(service.result)
                 var numberOfResults = service.result.count
                 for (key,value) in service.result {
