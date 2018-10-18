@@ -41,8 +41,8 @@ class TimeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         let numberOfTimes = 7
         self.calendarArray = getCalendar().arrayOfTimes(numberOfTimeSlots: numberOfTimes)
         let indexPathForFirstRow = IndexPath(row: 0, section: 0)
-        self.calendarCollectionView.selectItem(at: indexPathForFirstRow, animated: false, scrollPosition: [])
-        self.collectionView(self.calendarCollectionView, didSelectItemAt: indexPathForFirstRow)
+//        self.calendarCollectionView.selectItem(at: indexPathForFirstRow, animated: false, scrollPosition: [])
+//        self.collectionView(self.calendarCollectionView, didSelectItemAt: indexPathForFirstRow)
     }
     
     override func viewDidLoad() {

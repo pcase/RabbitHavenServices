@@ -6,7 +6,6 @@
 //  Copyright © 2018 Azure Horse Creations. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 class HomeHealthCheckViewController: UIViewController {

@@ -316,7 +316,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="bhz-VN-cjC">
-                                <rect key="frame" x="10" y="314" width="355" height="30"/>
+                                <rect key="frame" x="10" y="270" width="355" height="30"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Service:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4SQ-IH-1kD">
                                         <rect key="frame" x="0.0" y="0.0" width="62" height="30"/>
@@ -336,7 +336,7 @@
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="TN6-OO-0oc">
-                                <rect key="frame" x="10" y="354" width="355" height="30"/>
+                                <rect key="frame" x="10" y="310" width="355" height="30"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Minimum suggested donation:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h2q-dW-E7e">
                                         <rect key="frame" x="0.0" y="0.0" width="231.5" height="30"/>
@@ -356,7 +356,7 @@
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="jcJ-se-htj">
-                                <rect key="frame" x="10" y="394" width="355" height="30"/>
+                                <rect key="frame" x="10" y="350" width="355" height="30"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="USD" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bqv-QR-WBp">
                                         <rect key="frame" x="0.0" y="0.0" width="35" height="30"/>
@@ -617,7 +617,7 @@
         <image name="rabbithavenlogotrimmed" width="134" height="101"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Msu-nb-W2I"/>
+        <segue reference="j5c-iB-6bF"/>
         <segue reference="9Ek-ML-d0l"/>
     </inferredMetricsTieBreakers>
 </document>
