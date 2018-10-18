@@ -11,6 +11,8 @@ import Foundation
 class Booking {
     
     var service  : String = ""
+    var providerIds : [String] = []
+    var providerId: String = ""
     var provider : String = ""
     var providerImageName : String = ""
     var donation : Int = 0

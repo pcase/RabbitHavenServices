@@ -7,23 +7,14 @@
 //
 
 import UIKit
-import SwiftyJSON
-import RealmSwift
-import Alamofire
 
 class ServicesViewController: UIViewController {
-
-    let realm = try! Realm()
     
     var booking = Booking()
-    
-    var serviceList: [Service] = []
     var serviceDictionary: [String:Service] = [:]
     
     @IBOutlet weak var nailTrimButton: UIButton!
-
     @IBOutlet weak var homeHealthCheckButton: UIButton!
-
     @IBOutlet weak var bunnyHopButton: UIButton!
 
     override func viewDidLoad() {
@@ -54,6 +45,11 @@ class ServicesViewController: UIViewController {
             vcNailTrim?.booking = booking
         }
 
+        if segue.identifier == "goToHomeHealthCheck" {
+            let vcHomeHealthCheck = segue.destination as? HomeHealthCheckViewController
+            vcHomeHealthCheck?.booking = booking
+        }
+
         if segue.identifier == "goToProviderFromServices" {
             let vcProvider = segue.destination as? ProviderViewController
             vcProvider?.booking = booking
@@ -74,9 +70,14 @@ class ServicesViewController: UIViewController {
         booking.provider = ""
         booking.quantity = 1
         booking.service = (service?.name)!
+        
+        for (key, _) in (service?.unit_map)! {
+            booking.providerIds.append(key)
+        }
+        
         return booking
     }
-    
+
     func getServices() {
         let networkLayer: NetworkLayer = NetworkLayer()
         
@@ -88,7 +89,6 @@ class ServicesViewController: UIViewController {
         ]
         
         let successHandler: ((Token)) -> Void = { (token) in
-            print(token)
             
             let headers : [String: String] = ["Content-Type":"application/json; charset=UTF-8",
                                               "X-Company-Login":Constants.COMPANY,
@@ -102,6 +102,7 @@ class ServicesViewController: UIViewController {
             ]
             
             let successHandler: ((Services)) -> Void = { (service) in
+                print(service.result)
                 var numberOfResults = service.result.count
                 for (key,value) in service.result {
                     self.serviceDictionary[value.name] = value
