@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class TimeViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, CalendarDelgate {
     
@@ -41,8 +42,6 @@ class TimeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         let numberOfTimes = 7
         self.calendarArray = getCalendar().arrayOfTimes(numberOfTimeSlots: numberOfTimes)
         let indexPathForFirstRow = IndexPath(row: 0, section: 0)
-//        self.calendarCollectionView.selectItem(at: indexPathForFirstRow, animated: false, scrollPosition: [])
-//        self.collectionView(self.calendarCollectionView, didSelectItemAt: indexPathForFirstRow)
     }
     
     override func viewDidLoad() {
@@ -137,6 +136,9 @@ class TimeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     func getFirstWorkingDay(providerId: String) {
+        
+        SVProgressHUD.show()
+        
         let networkLayer: NetworkLayer = NetworkLayer()
         
         // Get the token
@@ -147,7 +149,7 @@ class TimeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         ]
         
         let successHandler: ((Token)) -> Void = { (token) in
-            
+            SVProgressHUD.dismiss()
             let headers : [String: String] = ["Content-Type":"application/json; charset=UTF-8",
                                               "X-Company-Login":Constants.COMPANY,
                                               "X-Token":token.result
@@ -176,6 +178,7 @@ class TimeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         }
         
         let errorHandler: (String) -> Void = { (error) in
+            SVProgressHUD.dismiss()
             print(error)
         }
         
@@ -183,6 +186,9 @@ class TimeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     func getStartTimeMatrix(date: String, serviceId: String, providerId: String) {
+        
+        SVProgressHUD.show()
+        
         let networkLayer: NetworkLayer = NetworkLayer()
         
         // Get the token
@@ -194,6 +200,7 @@ class TimeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         
         let successHandler: ((Token)) -> Void = { (token) in
             
+            SVProgressHUD.dismiss()
             let headers : [String: String] = ["Content-Type":"application/json; charset=UTF-8",
                                               "X-Company-Login":Constants.COMPANY,
                                               "X-Token":token.result
@@ -207,7 +214,6 @@ class TimeViewController: UIViewController, UICollectionViewDelegate, UICollecti
             
             let successHandler: ((StartTimeMatrix)) -> Void = { (startTimeMatrix) in
                 self.startTimes = startTimeMatrix.result
-                print(startTimeMatrix.result["0"])
             }
             
             let errorHandler: (String) -> Void = { (error) in
@@ -218,6 +224,7 @@ class TimeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         }
         
         let errorHandler: (String) -> Void = { (error) in
+            SVProgressHUD.dismiss()
             print(error)
         }
         

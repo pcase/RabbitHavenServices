@@ -7,11 +7,15 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class ProviderViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     var booking = Booking()
     var providerDictionary: [String:Provider] = [:]
+    var task: URLSessionDownloadTask!
+    var session: URLSession!
+    var cache:NSCache<AnyObject, AnyObject>!
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -22,6 +26,7 @@ class ProviderViewController: UIViewController, UITableViewDataSource, UITableVi
     }
 
     var providerNameImageList = [ProviderNameImage]()
+    var providerImageList = [UIImage]()
     
     func mapProviderDictionaryToStruct(dictionary:  [String:Provider]) -> [ProviderNameImage] {
         var arr = [ProviderNameImage]()
@@ -35,13 +40,23 @@ class ProviderViewController: UIViewController, UITableViewDataSource, UITableVi
         return arr
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.cache = NSCache()
+        session = URLSession.shared
+        task = URLSessionDownloadTask()
         tableView.dataSource = self
         tableView.delegate = self
         
         providerNameImageList = mapProviderDictionaryToStruct(dictionary: providerDictionary)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
     }
     
     override func didReceiveMemoryWarning() {
@@ -49,7 +64,7 @@ class ProviderViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     // MARK: - Datasource functions
-
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -57,30 +72,7 @@ class ProviderViewController: UIViewController, UITableViewDataSource, UITableVi
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return providerNameImageList.count
     }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cellReuseIdentifier", for: indexPath)
-        cell.textLabel?.text = providerNameImageList[indexPath.row].name
-   
-        // Download the image
-        let url = URL(string: providerNameImageList[indexPath.row].imagePath)
-        URLSession.shared.dataTask(with: url!, completionHandler: { (data, response, error) in
 
-            if error != nil {
-                print(error!)
-                return
-            }
-
-            DispatchQueue.main.async {
-                cell.imageView?.image = UIImage(data: data!)
-                tableView.reloadData()
-            }
-
-        }).resume()
-
-        return cell
-    }
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         booking.providerId = providerNameImageList[indexPath.row].id
     }
@@ -90,5 +82,38 @@ class ProviderViewController: UIViewController, UITableViewDataSource, UITableVi
             let vcTime = segue.destination as? TimeViewController
             vcTime?.booking = booking
         }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cellReuseIdentifier", for: indexPath)
+        cell.textLabel?.text = providerNameImageList[indexPath.row].name
+        cell.imageView?.image = UIImage(named: "placeholder")
+        
+        if (self.cache.object(forKey: (indexPath as NSIndexPath).row as AnyObject) != nil){
+
+            // Image is cached
+            cell.imageView?.image = self.cache.object(forKey: (indexPath as NSIndexPath).row as AnyObject) as? UIImage
+            
+        } else {
+            // Download image
+            SVProgressHUD.show()
+            let imageUrl = providerNameImageList[indexPath.row].imagePath
+            let url:URL! = URL(string: imageUrl)
+            task = session.downloadTask(with: url, completionHandler: { (location, response, error) -> Void in
+                if let data = try? Data(contentsOf: url){
+                    DispatchQueue.main.async(execute: { () -> Void in
+                        SVProgressHUD.dismiss()
+                        if let updateCell = tableView.cellForRow(at: indexPath) {
+                            let img:UIImage! = UIImage(data: data)
+                            updateCell.imageView?.image = img
+                            self.cache.setObject(img, forKey: (indexPath as NSIndexPath).row as AnyObject)
+                        }
+                    })
+                }
+            })
+            task.resume()
+        }
+        return cell
     }
 }

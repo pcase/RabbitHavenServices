@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class NailTrimViewController: UIViewController {
 
@@ -101,6 +102,9 @@ class NailTrimViewController: UIViewController {
     }
 
     func getProviders() {
+        
+        SVProgressHUD.show()
+        
         let networkLayer: NetworkLayer = NetworkLayer()
         
         // Get the token
@@ -125,6 +129,7 @@ class NailTrimViewController: UIViewController {
             
             let successHandler: ((Providers)) -> Void = { (providers) in
                 _ = providers.result.count
+                SVProgressHUD.dismiss()
                 for (key,value) in providers.result {
                     if (self.booking.providerIds.contains(value.id)) {
                         self.providerDictionary[value.id] = value
@@ -133,6 +138,7 @@ class NailTrimViewController: UIViewController {
             }
             
             let errorHandler: (String) -> Void = { (error) in
+                SVProgressHUD.dismiss()
                 print(error)
             }
             

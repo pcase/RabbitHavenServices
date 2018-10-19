@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class HomeHealthCheckViewController: UIViewController {
     
@@ -37,6 +38,9 @@ class HomeHealthCheckViewController: UIViewController {
     }
     
     func getProviders() {
+        
+        SVProgressHUD.show()
+        
         let networkLayer: NetworkLayer = NetworkLayer()
         
         // Get the token
@@ -60,6 +64,7 @@ class HomeHealthCheckViewController: UIViewController {
             ]
             
             let successHandler: ((Providers)) -> Void = { (providers) in
+                 SVProgressHUD.dismiss()
                 _ = providers.result.count
                 for (_,value) in providers.result {
                     if (self.booking.providerIds.contains(value.id)) {
@@ -69,6 +74,7 @@ class HomeHealthCheckViewController: UIViewController {
             }
             
             let errorHandler: (String) -> Void = { (error) in
+                SVProgressHUD.dismiss()
                 print(error)
             }
             

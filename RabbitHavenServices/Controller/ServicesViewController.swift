@@ -20,7 +20,7 @@ class ServicesViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        SVProgressHUD.show()
         getServices()
    }
 
@@ -81,8 +81,6 @@ class ServicesViewController: UIViewController {
 
     func getServices() {
         
-        SVProgressHUD.show()
-        
         let networkLayer: NetworkLayer = NetworkLayer()
         
         // Get the token
@@ -107,13 +105,12 @@ class ServicesViewController: UIViewController {
             
             let successHandler: ((Services)) -> Void = { (service) in
                 SVProgressHUD.dismiss()
-                print(service.result)
-                var numberOfResults = service.result.count
-                for (key,value) in service.result {
+                for (_,value) in service.result {
                     self.serviceDictionary[value.name] = value
                 }
             }
             let errorHandler: (String) -> Void = { (error) in
+                SVProgressHUD.dismiss()
                 print(error)
             }
             
